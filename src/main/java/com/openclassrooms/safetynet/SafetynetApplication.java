@@ -17,7 +17,8 @@ public class SafetynetApplication {
 
 	public static void main(String[] args) throws IOException {
 
-        // SpringApplication.run(SafetynetApplication.class, args);
-	}
+        SpringApplication.run(SafetynetApplication.class, args);
+
+    }
 
 }

@@ -1,10 +1,12 @@
 package com.openclassrooms.safetynet.repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.openclassrooms.safetynet.model.Firestation;
 import com.openclassrooms.safetynet.model.Medicalrecord;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.model.Root;
 import jakarta.annotation.PostConstruct;
+import lombok.Data;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Data
 public class RootRepository {
 
     private Root root;
@@ -22,17 +25,17 @@ public class RootRepository {
     private String fullPath = "C:\\Users\\Samuel\\Documents\\JAVA\\safetynet\\src\\main\\java\\com\\openclassrooms\\safetynet\\data\\data.json";
 
     @PostConstruct
-    public void initializeDataFirstStart() {
-
+    public void initialize() {
+        reload();
     }
+
 
     public void reload() {
         try {
-            System.out.println(fullPath);
             root = mapper.readValue(new File(fullPath), Root.class);
             return;
         } catch (Exception e) {
-            System.out.println("File data.json not found, reading from the original file in resources. " + e.getMessage());
+            System.out.println("File data.json not found, reading from the original file in resources. \n");
         }
         try {
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FILE_NAME);
@@ -71,18 +74,8 @@ public class RootRepository {
         reload();
     }
 
-    public List<Medicalrecord> getMedicalRecordByName() {
-        return root.getMedicalrecords();
-    }
-
-    public Root getRoot() {
-        return root;
-    }
-
     public void setFullPath(String fullPath) {
         this.fullPath = fullPath;
     }
-    public String getFullPath() {
-        return fullPath;
-    }
+
 }

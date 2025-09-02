@@ -6,11 +6,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class RootRepositoryTest {
 
+    RootRepository rootRepository;
+
+    @BeforeEach
+    public void resetRootRepository() {
+        rootRepository = new RootRepository();
+        rootRepository.reload();
+    }
 
     @Test
     public void testSaving_newPersonDataMustBeSavedAndReturn() {
@@ -24,12 +31,12 @@ public class RootRepositoryTest {
         newPerson.setEmail("johnwatsontest@email.com");
 
 
-        RootRepository rootRepository = new RootRepository();
         rootRepository.setFullPath("C:\\Users\\Samuel\\Documents\\JAVA\\safetynet\\src\\main\\java\\com\\openclassrooms\\safetynet\\data\\dataTest.json");
         rootRepository.reload();
         rootRepository.addPerson(newPerson);
-        rootRepository.reload();
+
         assertNotNull(rootRepository.getPersonByName("Watson"));
     }
+
 
 }
