@@ -4,6 +4,7 @@ import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,23 @@ public class PersonService {
         return result;
     }
 
-    public List<Person> getPersonsByFirestationNumber() {
-        return null;
+    public List<Person> getPersonsByFirestationNumber(int firestationNumber) {
+        List<String> addressOfFirestation = new ArrayList<>();
+        List<Person> result = new ArrayList<>();
+
+        // First, I'm checking the address of the station number
+        rootRepository.getRoot().getFirestations().forEach(firestation -> {
+            if (firestation.getStation() == firestationNumber) {
+                addressOfFirestation.add(firestation.getAddress());
+            }
+        });
+
+        rootRepository.getRoot().getPersons().forEach(person -> {
+            if (addressOfFirestation.contains(person.getAddress())) {
+                result.add(person);
+            }
+        });
+        return result;
     }
 
 }
