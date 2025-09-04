@@ -19,7 +19,7 @@ public class ChildAlertService {
 
     private RootRepository rootRepository;
 
-    ChildAlertService(RootRepository rootRepository) {
+    public ChildAlertService(RootRepository rootRepository) {
         this.rootRepository = rootRepository;
     }
 
@@ -45,19 +45,16 @@ public class ChildAlertService {
 
     private int calculateAge(Person person) {
         String firstName = person.getFirstName();
-        String lastName = person.getFirstName();
-        int age = -1;
+        String lastName = person.getLastName();
 
-        rootRepository.getRoot().getMedicalrecords().stream()
+        return rootRepository.getRoot().getMedicalrecords().stream()
                 .filter(medicalRecord ->
                     medicalRecord.getFirstName().equals(firstName) && medicalRecord.getLastName().equals(lastName)
                 ).findFirst()
                 .map(medicalRecord -> {
-                   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
                    LocalDate birthDate = LocalDate.parse(medicalRecord.getBirthdate(), formatter);
                    return Period.between(birthDate, LocalDate.now()).getYears();
-                });
-
-        return age;
+                }).orElse(-1);
     }
 }
