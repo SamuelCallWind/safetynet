@@ -42,7 +42,7 @@ public class FireService {
                             DateUtils.calculateAge(mr.getBirthdate()),
                             mr.getMedications(),
                             mr.getAllergies(),
-                            
+                            FirestationService.getFirestationNumberFromAddress(address, rootRepository)
                             ));
                 }
             }

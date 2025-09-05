@@ -14,9 +14,10 @@ public class FirePersonDto {
     int age;
     List<String> medications;
     List<String> allergies;
-    Firestation firestationAssigned;
+    int firestationAssigned;
 
-    public FirePersonDto(String firstName, String lastName, String phoneNumber, int age, List<String> medications, List<String> allergies) {
+    public FirePersonDto(String firstName, String lastName, String phoneNumber, int age, List<String> medications,
+                         List<String> allergies, int firestationAssigned) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
