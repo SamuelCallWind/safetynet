@@ -6,6 +6,7 @@ import com.openclassrooms.safetynet.dto.HouseholdMemberDto;
 import com.openclassrooms.safetynet.model.Medicalrecord;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.repository.RootRepository;
+import com.openclassrooms.safetynet.util.DateUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -42,19 +43,17 @@ public class ChildAlertService {
         return new ChildAlertResponse(children, householdMembers);
     }
 
-
     private int calculateAge(Person person) {
         String firstName = person.getFirstName();
         String lastName = person.getLastName();
 
         return rootRepository.getRoot().getMedicalrecords().stream()
                 .filter(medicalRecord ->
-                    medicalRecord.getFirstName().equals(firstName) && medicalRecord.getLastName().equals(lastName)
+                        medicalRecord.getFirstName().equals(firstName) && medicalRecord.getLastName().equals(lastName)
                 ).findFirst()
                 .map(medicalRecord -> {
-                   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-                   LocalDate birthDate = LocalDate.parse(medicalRecord.getBirthdate(), formatter);
-                   return Period.between(birthDate, LocalDate.now()).getYears();
+                    return DateUtils.calculateAge(medicalRecord.getBirthdate());
                 }).orElse(-1);
     }
+
 }
