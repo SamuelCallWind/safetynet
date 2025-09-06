@@ -15,9 +15,6 @@ import java.util.List;
 public class FirestationController {
 
     @Autowired
-    RootRepository rootRepository;
-
-    @Autowired
     PersonService personService;
 
     @GetMapping("/firestation")

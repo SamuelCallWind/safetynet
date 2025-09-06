@@ -22,7 +22,7 @@ public class FireService {
     RootRepository rootRepository;
 
 
-    public FireResponse getPersonsLivingAt(String address) {
+    public FireResponse getPersonsLivingAtAddress(String address) {
         List<Person> personList = rootRepository.getRoot().getPersons().stream()
                 .filter(person -> person.getAddress().equals(address))
                 .toList();

@@ -15,6 +15,6 @@ public class FireController {
 
     @GetMapping("/fire")
     public FireResponse getFire(@RequestParam String address) {
-        return fireService.getPersonsLivingAt(address);
+        return fireService.getPersonsLivingAtAddress(address);
     }
 }

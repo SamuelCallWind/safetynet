@@ -1,10 +1,10 @@
 package com.openclassrooms.safetynet.service;
 
+import com.openclassrooms.safetynet.model.Medicalrecord;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.repository.RootRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +30,10 @@ public class PersonService {
     }
 
     public List<Person> getPersonsByFirestationNumber(int firestationNumber) {
+        return getPersonsByFirestationNumber(firestationNumber, rootRepository);
+    }
+
+    public static List<Person> getPersonsByFirestationNumber(int firestationNumber, RootRepository rootRepository) {
         List<String> addressOfFirestation = new ArrayList<>();
         List<Person> result = new ArrayList<>();
 
@@ -48,4 +52,24 @@ public class PersonService {
         return result;
     }
 
+    public static List<String> getMedicationFromName(String firstName, String lastName, RootRepository rootRepository) {
+        return rootRepository.getRoot().getMedicalrecords().stream()
+                .filter(record -> record.getFirstName().equals(firstName) && record.getLastName().equals(lastName))
+                .findFirst().map(Medicalrecord::getMedications)
+                .orElse(new ArrayList<>());
+    }
+
+    public static List<String> getAllergiesFromName(String firstName, String lastName, RootRepository rootRepository) {
+        return rootRepository.getRoot().getMedicalrecords().stream()
+                .filter(record -> record.getFirstName().equals(firstName) && record.getLastName().equals(lastName))
+                .findFirst().map(Medicalrecord::getAllergies)
+                .orElse(new ArrayList<>());
+    }
+
+    public static String getAgeFromPersonsName(String firstName, String lastName, RootRepository rootRepository) {
+        return rootRepository.getRoot().getMedicalrecords().stream()
+                .filter(record -> record.getFirstName().equals(firstName) && record.getLastName().equals(lastName))
+                .findFirst().map(Medicalrecord::getBirthdate)
+                .orElse("");
+    }
 }
