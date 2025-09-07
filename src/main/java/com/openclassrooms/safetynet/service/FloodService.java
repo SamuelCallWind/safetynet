@@ -24,9 +24,9 @@ public class FloodService {
 
     public FloodResponse getFloodResponse(List<Integer> stations) {
         List<HouseholdDto> houseHolds = new ArrayList<>();
-        List<PersonDto> personDtos = new ArrayList<>();
         List<StationDto> stationDtos = new ArrayList<>();
         for (Integer station : stations) {
+            List<PersonDto> personDtos = new ArrayList<>();
             PersonService.getPersonsByFirestationNumber(station, rootRepository)
                     .forEach(person -> {
                         personDtos.add(new PersonDto(person.getFirstName(), person.getLastName(),
