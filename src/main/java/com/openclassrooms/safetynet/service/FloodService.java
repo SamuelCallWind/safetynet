@@ -33,7 +33,7 @@ public class FloodService {
                                 MedicalRecordService.getMedicationFromFullName(person.getFirstName(), person.getLastName(), rootRepository),
                                 MedicalRecordService.getAllergiesFromFullName(person.getFirstName(), person.getLastName(), rootRepository),
                                 person.getPhone(),
-                                DateUtils.calculateAge(MedicalRecordService.getAgeFromPersonsName(person.getFirstName(), person.getLastName(), rootRepository))));
+                                DateUtils.calculateAge(MedicalRecordService.getBirthdateFromPersonsName(person.getFirstName(), person.getLastName(), rootRepository))));
                     });
             houseHolds.add(new HouseholdDto(personDtos));
             stationDtos.add(new StationDto(FirestationService.getFirestationAddressFromNumber(station, rootRepository) ,houseHolds));

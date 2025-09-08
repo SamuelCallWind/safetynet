@@ -28,7 +28,7 @@ public class MedicalRecordService {
                 .orElse(new ArrayList<>());
     }
 
-    public static String getAgeFromPersonsName(String firstName, String lastName, RootRepository rootRepository) {
+    public static String getBirthdateFromPersonsName(String firstName, String lastName, RootRepository rootRepository) {
         return rootRepository.getRoot().getMedicalrecords().stream()
                 .filter(record -> record.getFirstName().equals(firstName) && record.getLastName().equals(lastName))
                 .findFirst().map(Medicalrecord::getBirthdate)
