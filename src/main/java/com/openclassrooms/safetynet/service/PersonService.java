@@ -52,24 +52,4 @@ public class PersonService {
         return result;
     }
 
-    public static List<String> getMedicationFromName(String firstName, String lastName, RootRepository rootRepository) {
-        return rootRepository.getRoot().getMedicalrecords().stream()
-                .filter(record -> record.getFirstName().equals(firstName) && record.getLastName().equals(lastName))
-                .findFirst().map(Medicalrecord::getMedications)
-                .orElse(new ArrayList<>());
-    }
-
-    public static List<String> getAllergiesFromName(String firstName, String lastName, RootRepository rootRepository) {
-        return rootRepository.getRoot().getMedicalrecords().stream()
-                .filter(record -> record.getFirstName().equals(firstName) && record.getLastName().equals(lastName))
-                .findFirst().map(Medicalrecord::getAllergies)
-                .orElse(new ArrayList<>());
-    }
-
-    public static String getAgeFromPersonsName(String firstName, String lastName, RootRepository rootRepository) {
-        return rootRepository.getRoot().getMedicalrecords().stream()
-                .filter(record -> record.getFirstName().equals(firstName) && record.getLastName().equals(lastName))
-                .findFirst().map(Medicalrecord::getBirthdate)
-                .orElse("");
-    }
 }

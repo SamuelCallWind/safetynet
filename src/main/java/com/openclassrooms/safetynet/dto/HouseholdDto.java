@@ -1,7 +1,6 @@
 package com.openclassrooms.safetynet.dto;
 
 import lombok.Data;
-
 import java.util.List;
 
 @Data

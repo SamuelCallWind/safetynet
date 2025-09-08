@@ -30,10 +30,10 @@ public class FloodService {
             PersonService.getPersonsByFirestationNumber(station, rootRepository)
                     .forEach(person -> {
                         personDtos.add(new PersonDto(person.getFirstName(), person.getLastName(),
-                                PersonService.getMedicationFromName(person.getFirstName(), person.getLastName(), rootRepository),
-                                PersonService.getAllergiesFromName(person.getFirstName(), person.getLastName(), rootRepository),
+                                MedicalRecordService.getMedicationFromFullName(person.getFirstName(), person.getLastName(), rootRepository),
+                                MedicalRecordService.getAllergiesFromFullName(person.getFirstName(), person.getLastName(), rootRepository),
                                 person.getPhone(),
-                                DateUtils.calculateAge(PersonService.getAgeFromPersonsName(person.getFirstName(), person.getLastName(), rootRepository))));
+                                DateUtils.calculateAge(MedicalRecordService.getAgeFromPersonsName(person.getFirstName(), person.getLastName(), rootRepository))));
                     });
             houseHolds.add(new HouseholdDto(personDtos));
             stationDtos.add(new StationDto(FirestationService.getFirestationAddressFromNumber(station, rootRepository) ,houseHolds));

@@ -22,6 +22,4 @@ public class FirestationController {
         return personService.getPersonsByFirestationNumber(stationNumber);
     }
 
-
-
 }
