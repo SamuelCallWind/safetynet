@@ -17,6 +17,7 @@ public class PersonInfoLastNameDto {
     List<String> allergies;
 
     public PersonInfoLastNameDto(String firstName, String lastName, String address, int age, String email, List<String> medications, List<String> allergies) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.age = age;

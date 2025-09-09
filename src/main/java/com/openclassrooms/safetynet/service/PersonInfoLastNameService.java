@@ -20,6 +20,7 @@ public class PersonInfoLastNameService {
         List<PersonInfoLastNameDto> result = new ArrayList<>();
         rootRepository.getRoot().getPersons().stream().filter(person -> person.getLastName().equals(lastName))
                 .forEach(person -> {
+                    System.out.println(person.getFirstName());
                     result.add(new PersonInfoLastNameDto(person.getFirstName(),
                             person.getLastName(),
                             person.getAddress(),
