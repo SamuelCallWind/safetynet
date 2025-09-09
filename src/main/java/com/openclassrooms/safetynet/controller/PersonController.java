@@ -33,4 +33,16 @@ public class PersonController {
                 personDto.getZip()
         ));
     }
+
+    @DeleteMapping("/person")
+    public void deletePerson(@RequestBody PersonDto personDto) {
+        personService.removePerson(new Person(personDto.getFirstName(),
+                personDto.getLastName(),
+                personDto.getAddress(),
+                personDto.getCity(),
+                personDto.getPhone(),
+                personDto.getEmail(),
+                personDto.getZip()
+        ));
+    }
 }

@@ -78,4 +78,8 @@ public class RootRepository {
         this.fullPath = fullPath;
     }
 
+    public void removePerson(Person person) {
+        root.getPersons().remove(person);
+        save();
+    }
 }
