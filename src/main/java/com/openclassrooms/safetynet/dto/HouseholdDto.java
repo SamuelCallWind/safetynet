@@ -5,9 +5,9 @@ import java.util.List;
 
 @Data
 public class HouseholdDto {
-    List<PersonDto> personDtos;
+    List<FloodPersonDto> floodPersonDtos;
 
-    public HouseholdDto(List<PersonDto> personDtos) {
-        this.personDtos = personDtos;
+    public HouseholdDto(List<FloodPersonDto> floodPersonDtos) {
+        this.floodPersonDtos = floodPersonDtos;
     }
 }

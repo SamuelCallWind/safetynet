@@ -52,4 +52,8 @@ public class PersonService {
         return result;
     }
 
+    public void addPerson(Person person) {
+        rootRepository.addPerson(person);
+    }
+
 }
