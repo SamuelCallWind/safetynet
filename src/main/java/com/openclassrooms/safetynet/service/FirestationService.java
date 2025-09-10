@@ -39,4 +39,8 @@ public class FirestationService {
     public void removeFirestation(Firestation firestation) {
         rootRepository.removeFirestation(firestation);
     }
+
+    public void modifyFirestation(Firestation firestation) {
+        rootRepository.modifyFirestation(firestation);
+    }
 }

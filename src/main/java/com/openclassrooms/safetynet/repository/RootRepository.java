@@ -112,4 +112,16 @@ public class RootRepository {
         }
         save();
     }
+
+    public void modifyFirestation(Firestation firestation) {
+        try {
+            root.getFirestations().stream()
+                    .filter(station -> station.getAddress().equals(firestation.getAddress()))
+                    .findFirst()
+                    .ifPresent(station -> station.setStation(firestation.getStation()));
+            save();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

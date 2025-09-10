@@ -33,4 +33,9 @@ public class FirestationController {
     public void removeFirestation(@RequestBody Firestation firestation) {
         firestationService.removeFirestation(firestation);
     }
+
+    @PutMapping("/firestation")
+    public void modifyFirestation(@RequestBody Firestation firestation) {
+        firestationService.modifyFirestation(firestation);
+    }
 }
