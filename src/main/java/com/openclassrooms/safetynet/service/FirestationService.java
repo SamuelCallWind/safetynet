@@ -11,6 +11,8 @@ import java.util.List;
 @Service
 public class FirestationService {
 
+    @Autowired
+    RootRepository rootRepository;
 
     public static int getFirestationNumberFromAddress(String address, RootRepository rootRepository) {
         Firestation firestation = rootRepository.getRoot().getFirestations().stream()
@@ -26,4 +28,15 @@ public class FirestationService {
         return (firestation != null) ? firestation.getAddress() : "Not found";
     }
 
+    public void addFirestation(Firestation firestation) {
+        if (rootRepository.getRoot().getFirestations().contains(firestation)) {
+            throw new RuntimeException("The firestation is already inside the database");
+        } else {
+            rootRepository.addFirestation(firestation);
+        }
+    }
+
+    public void removeFirestation(Firestation firestation) {
+        rootRepository.removeFirestation(firestation);
+    }
 }

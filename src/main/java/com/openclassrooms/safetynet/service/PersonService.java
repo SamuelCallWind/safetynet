@@ -19,10 +19,10 @@ public class PersonService {
         return new ArrayList<>(rootRepository.getRoot().getPersons());
     }
 
-    public List<Person> getPersonByLastName(String name) {
+    public List<Person> getPersonByLastName(String lastName) {
         List<Person> result = new ArrayList<>();
         rootRepository.getRoot().getPersons().forEach(person -> {
-            if (person.getLastName().equals(name)) {
+            if (person.getLastName().equals(lastName)) {
                 result.add(person);
             }
         });

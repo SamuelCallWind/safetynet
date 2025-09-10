@@ -98,4 +98,18 @@ public class RootRepository {
         }
         save();
     }
+
+    public void addFirestation(Firestation firestation) {
+        root.getFirestations().add(firestation);
+        save();
+    }
+
+    public void removeFirestation(Firestation firestation) {
+        try {
+            root.getFirestations().remove(firestation);
+        } catch (Exception e) {
+            System.out.println("There was an error while trying to delete the firestation" + e.getMessage());
+        }
+        save();
+    }
 }

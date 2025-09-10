@@ -191,22 +191,6 @@
     "phone" : "555-555-555",
     "email" : "testemail@emailtest.com",
     "zip" : 33333
-  }, {
-    "firstName" : "Bob",
-    "lastName" : "Kirkland",
-    "address" : "test Atlanta 123",
-    "city" : "London",
-    "phone" : "555-555-555",
-    "email" : "testemail@emailtest.com",
-    "zip" : 33333
-  }, {
-    "firstName" : "Bob",
-    "lastName" : "Kirkland",
-    "address" : "test Atlanta 123",
-    "city" : "London",
-    "phone" : "555-555-555",
-    "email" : "testemail@emailtest.com",
-    "zip" : 33333
   } ],
   "medicalrecords" : [ {
     "firstName" : "John",

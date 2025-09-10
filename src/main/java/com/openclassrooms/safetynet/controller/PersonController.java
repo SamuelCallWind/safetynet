@@ -18,8 +18,8 @@ public class PersonController {
     PersonService personService;
 
     @GetMapping("/person")
-    public List<Person> getPersonByLastName(@RequestParam String name) {
-        return personService.getPersonByLastName(name);
+    public List<Person> getPersonByLastName(@RequestParam String lastName) {
+        return personService.getPersonByLastName(lastName);
     }
 
     @PostMapping("/person")
