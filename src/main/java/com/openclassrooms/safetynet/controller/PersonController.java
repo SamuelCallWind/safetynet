@@ -45,4 +45,9 @@ public class PersonController {
                 personDto.getZip()
         ));
     }
+
+    @PutMapping("/person")
+    public void modifyPerson(@RequestBody Person person) {
+        personService.modifyPerson(person);
+    }
 }

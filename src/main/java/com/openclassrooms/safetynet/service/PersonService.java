@@ -60,4 +60,8 @@ public class PersonService {
         rootRepository.removePerson(person);
     }
 
+    public void modifyPerson(Person person) {
+        rootRepository.modifyPerson(person);
+    }
+
 }

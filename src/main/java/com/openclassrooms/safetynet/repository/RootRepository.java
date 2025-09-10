@@ -82,4 +82,20 @@ public class RootRepository {
         root.getPersons().remove(person);
         save();
     }
+
+    public void modifyPerson(Person dataToBeChanged) {
+        List<Person> persons = root.getPersons();
+        for (int i = 0; i < persons.size(); ++i) {
+            Person currentPerson = persons.get(i);
+            if (currentPerson.getFirstName().equals(dataToBeChanged.getFirstName()) && currentPerson.getLastName().equals(dataToBeChanged.getLastName())) {
+                currentPerson.setAddress(dataToBeChanged.getAddress());
+                currentPerson.setCity(dataToBeChanged.getCity());
+                currentPerson.setPhone(dataToBeChanged.getPhone());
+                currentPerson.setEmail(dataToBeChanged.getEmail());
+                currentPerson.setZip(dataToBeChanged.getZip());
+                break;
+            }
+        }
+        save();
+    }
 }
