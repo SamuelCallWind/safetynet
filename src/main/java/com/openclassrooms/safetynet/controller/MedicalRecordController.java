@@ -16,7 +16,7 @@ public class MedicalRecordController {
     MedicalRecordService medicalRecordService;
 
     @PostMapping("/medicalRecord")
-    public void addMedicalRecord(Medicalrecord medicalrecord) {
+    public void addMedicalRecord(@RequestBody Medicalrecord medicalrecord) {
         medicalRecordService.addMedicalRecord(medicalrecord);
     }
 

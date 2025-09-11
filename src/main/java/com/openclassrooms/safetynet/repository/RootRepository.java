@@ -126,12 +126,8 @@ public class RootRepository {
     }
 
     public void addMedicalRecord(Medicalrecord medicalrecord) {
-        try {
-            root.getMedicalrecords().add(medicalrecord);
-            save();
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
-        }
+        root.getMedicalrecords().add(medicalrecord);
+        save();
     }
 
     public void removeMedicalRecord(String firstName, String lastName) {
@@ -141,5 +137,8 @@ public class RootRepository {
                 .orElse(null);
         root.getMedicalrecords().remove(recordToBeRemoved);
         save();
+    }
+
+    public void modifyMedicalRecord(String firstName, String lastName, Medicalrecord medicalrecord) {
     }
 }

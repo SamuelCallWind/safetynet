@@ -46,7 +46,7 @@ public class MedicalRecordService {
     }
 
     public void modifyMedicalRecord(String firstName, String lastName, Medicalrecord medicalrecord) {
-        // TODO
+        rootRepository.modifyMedicalRecord(firstName, lastName, medicalrecord);
     }
 
     public void removeMedicalRecord(String firstName, String lastName) {
