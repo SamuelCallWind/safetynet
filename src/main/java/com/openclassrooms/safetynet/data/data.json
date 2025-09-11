@@ -193,12 +193,6 @@
     "zip" : 33333
   } ],
   "medicalrecords" : [ {
-    "firstName" : "John",
-    "lastName" : "Boyd",
-    "birthdate" : "03/06/1984",
-    "medications" : [ "aznol:350mg", "hydrapermazol:100mg" ],
-    "allergies" : [ "nillacilan" ]
-  }, {
     "firstName" : "Jacob",
     "lastName" : "Boyd",
     "birthdate" : "03/06/1989",

@@ -124,4 +124,22 @@ public class RootRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public void addMedicalRecord(Medicalrecord medicalrecord) {
+        try {
+            root.getMedicalrecords().add(medicalrecord);
+            save();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void removeMedicalRecord(String firstName, String lastName) {
+        Medicalrecord recordToBeRemoved = root.getMedicalrecords().stream()
+                .filter(record -> record.getFirstName().equals(firstName) && record.getLastName().equals(lastName))
+                .findFirst()
+                .orElse(null);
+        root.getMedicalrecords().remove(recordToBeRemoved);
+        save();
+    }
 }
