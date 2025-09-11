@@ -139,6 +139,16 @@ public class RootRepository {
         save();
     }
 
-    public void modifyMedicalRecord(String firstName, String lastName, Medicalrecord medicalrecord) {
+    public void modifyMedicalRecord(Medicalrecord medicalrecord) {
+        for (int i = 0; i < root.getMedicalrecords().size(); ++i) {
+            Medicalrecord currentRecord = root.getMedicalrecords().get(i);
+            if (currentRecord.getFirstName().equals(medicalrecord.getFirstName())
+                    && currentRecord.getLastName().equals(medicalrecord.getLastName())) {
+                    currentRecord.setBirthdate(medicalrecord.getBirthdate());
+                    currentRecord.setMedications(medicalrecord.getMedications());
+                    currentRecord.setAllergies(medicalrecord.getAllergies());
+            }
+        }
+        save();
     }
 }
