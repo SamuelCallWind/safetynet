@@ -15,10 +15,10 @@ import java.util.List;
     RootRepository rootRepository;
 
     public static int getFirestationNumberFromAddress(String address, RootRepository rootRepository) {
-<span class="nc" id="L18">        Firestation firestation = rootRepository.getRoot().getFirestations().stream()</span>
-<span class="nc" id="L19">                .filter(f -&gt; f.getAddress().equals(address))</span>
-<span class="nc" id="L20">                .findAny().orElse(null);</span>
-<span class="nc bnc" id="L21" title="All 2 branches missed.">        return (firestation != null) ? firestation.getStation() : -1;</span>
+<span class="fc" id="L18">        Firestation firestation = rootRepository.getRoot().getFirestations().stream()</span>
+<span class="fc" id="L19">                .filter(f -&gt; f.getAddress().equals(address))</span>
+<span class="fc" id="L20">                .findAny().orElse(null);</span>
+<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        return (firestation != null) ? firestation.getStation() : -1;</span>
     }
 
     public static String getFirestationAddressFromNumber(Integer stationNumber, RootRepository rootRepository) {

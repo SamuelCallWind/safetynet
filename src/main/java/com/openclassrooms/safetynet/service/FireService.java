@@ -21,6 +21,11 @@ public class FireService {
     @Autowired
     RootRepository rootRepository;
 
+    FireService() {}
+    FireService(RootRepository rootRepository) {
+        this.rootRepository = rootRepository;
+    }
+
 
     public FireResponse getPersonsLivingAtAddress(String address) {
         List<Person> personList = rootRepository.getRoot().getPersons().stream()
