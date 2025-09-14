@@ -25,35 +25,35 @@ public class ChildAlertService {
 <span class="fc" id="L25">    }</span>
 
     public ChildAlertResponse getChildAlert(String address) {
-<span class="nc" id="L28">        List&lt;Person&gt; personsAtAddress = rootRepository.getRoot().getPersons().stream()</span>
-<span class="nc" id="L29">                .filter(p -&gt; p.getAddress().equals(address))</span>
-<span class="nc" id="L30">                .toList();</span>
+<span class="fc" id="L28">        List&lt;Person&gt; personsAtAddress = rootRepository.getRoot().getPersons().stream()</span>
+<span class="fc" id="L29">                .filter(p -&gt; p.getAddress().equals(address))</span>
+<span class="fc" id="L30">                .toList();</span>
 
-<span class="nc" id="L32">        List&lt;ChildDto&gt; children = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L33">        List&lt;HouseholdMemberDto&gt; householdMembers = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L32">        List&lt;ChildDto&gt; children = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L33">        List&lt;HouseholdMemberDto&gt; householdMembers = new ArrayList&lt;&gt;();</span>
 
-<span class="nc" id="L35">        personsAtAddress.forEach(person -&gt; {</span>
-<span class="nc" id="L36">            int age = calculateAge(person);</span>
-<span class="nc bnc" id="L37" title="All 2 branches missed.">            if (age &lt;= 18) {</span>
-<span class="nc" id="L38">                children.add(new ChildDto(person.getFirstName(), person.getLastName(), age));</span>
+<span class="fc" id="L35">        personsAtAddress.forEach(person -&gt; {</span>
+<span class="fc" id="L36">            int age = calculateAge(person);</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">            if (age &lt;= 18) {</span>
+<span class="fc" id="L38">                children.add(new ChildDto(person.getFirstName(), person.getLastName(), age));</span>
             } else {
-<span class="nc" id="L40">                householdMembers.add(new HouseholdMemberDto(person.getFirstName(), person.getLastName()));</span>
+<span class="fc" id="L40">                householdMembers.add(new HouseholdMemberDto(person.getFirstName(), person.getLastName()));</span>
             }
-<span class="nc" id="L42">        });</span>
-<span class="nc" id="L43">        return new ChildAlertResponse(children, householdMembers);</span>
+<span class="fc" id="L42">        });</span>
+<span class="fc" id="L43">        return new ChildAlertResponse(children, householdMembers);</span>
     }
 
     private int calculateAge(Person person) {
-<span class="nc" id="L47">        String firstName = person.getFirstName();</span>
-<span class="nc" id="L48">        String lastName = person.getLastName();</span>
+<span class="fc" id="L47">        String firstName = person.getFirstName();</span>
+<span class="fc" id="L48">        String lastName = person.getLastName();</span>
 
-<span class="nc" id="L50">        return rootRepository.getRoot().getMedicalrecords().stream()</span>
-<span class="nc" id="L51">                .filter(medicalRecord -&gt;</span>
-<span class="nc bnc" id="L52" title="All 4 branches missed.">                        medicalRecord.getFirstName().equals(firstName) &amp;&amp; medicalRecord.getLastName().equals(lastName)</span>
-<span class="nc" id="L53">                ).findFirst()</span>
-<span class="nc" id="L54">                .map(medicalRecord -&gt; {</span>
-<span class="nc" id="L55">                    return DateUtils.calculateAge(medicalRecord.getBirthdate());</span>
-<span class="nc" id="L56">                }).orElse(-1);</span>
+<span class="fc" id="L50">        return rootRepository.getRoot().getMedicalrecords().stream()</span>
+<span class="fc" id="L51">                .filter(medicalRecord -&gt;</span>
+<span class="pc bpc" id="L52" title="1 of 4 branches missed.">                        medicalRecord.getFirstName().equals(firstName) &amp;&amp; medicalRecord.getLastName().equals(lastName)</span>
+<span class="fc" id="L53">                ).findFirst()</span>
+<span class="fc" id="L54">                .map(medicalRecord -&gt; {</span>
+<span class="fc" id="L55">                    return DateUtils.calculateAge(medicalRecord.getBirthdate());</span>
+<span class="fc" id="L56">                }).orElse(-1);</span>
     }
 
 }

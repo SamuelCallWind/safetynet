@@ -6,11 +6,11 @@ import java.time.format.DateTimeFormatter;
 
 <span class="nc" id="L7">public class DateUtils {</span>
 
-<span class="nc" id="L9">    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(&quot;MM/dd/yyyy&quot;);</span>
+<span class="fc" id="L9">    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern(&quot;MM/dd/yyyy&quot;);</span>
 
     public static int calculateAge(String birthdate) {
-<span class="nc" id="L12">        LocalDate birthDate = LocalDate.parse(birthdate, FORMATTER);</span>
-<span class="nc" id="L13">        return Period.between(birthDate, LocalDate.now()).getYears();</span>
+<span class="fc" id="L12">        LocalDate birthDate = LocalDate.parse(birthdate, FORMATTER);</span>
+<span class="fc" id="L13">        return Period.between(birthDate, LocalDate.now()).getYears();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
