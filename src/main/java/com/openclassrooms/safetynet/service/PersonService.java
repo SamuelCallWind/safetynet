@@ -15,6 +15,11 @@ public class PersonService {
     @Autowired
     RootRepository rootRepository;
 
+    PersonService() {}
+    PersonService(RootRepository rootRepository) {
+        this.rootRepository = rootRepository;
+    }
+
     public List<Person> getPersons() {
         return new ArrayList<>(rootRepository.getRoot().getPersons());
     }

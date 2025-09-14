@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChildAlertService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">safetynet</a> &gt; <a href="index.source.html" class="el_package">com.openclassrooms.safetynet.service</a> &gt; <span class="el_source">ChildAlertService.java</span></div><h1>ChildAlertService.java</h1><pre class="source lang-java linenums">package com.openclassrooms.safetynet.service;
+
+import com.openclassrooms.safetynet.dto.ChildAlertResponse;
+import com.openclassrooms.safetynet.dto.ChildDto;
+import com.openclassrooms.safetynet.dto.HouseholdMemberDto;
+import com.openclassrooms.safetynet.model.Medicalrecord;
+import com.openclassrooms.safetynet.model.Person;
+import com.openclassrooms.safetynet.repository.RootRepository;
+import com.openclassrooms.safetynet.util.DateUtils;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class ChildAlertService {
+
+    private RootRepository rootRepository;
+
+<span class="fc" id="L23">    public ChildAlertService(RootRepository rootRepository) {</span>
+<span class="fc" id="L24">        this.rootRepository = rootRepository;</span>
+<span class="fc" id="L25">    }</span>
+
+    public ChildAlertResponse getChildAlert(String address) {
+<span class="nc" id="L28">        List&lt;Person&gt; personsAtAddress = rootRepository.getRoot().getPersons().stream()</span>
+<span class="nc" id="L29">                .filter(p -&gt; p.getAddress().equals(address))</span>
+<span class="nc" id="L30">                .toList();</span>
+
+<span class="nc" id="L32">        List&lt;ChildDto&gt; children = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L33">        List&lt;HouseholdMemberDto&gt; householdMembers = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L35">        personsAtAddress.forEach(person -&gt; {</span>
+<span class="nc" id="L36">            int age = calculateAge(person);</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">            if (age &lt;= 18) {</span>
+<span class="nc" id="L38">                children.add(new ChildDto(person.getFirstName(), person.getLastName(), age));</span>
+            } else {
+<span class="nc" id="L40">                householdMembers.add(new HouseholdMemberDto(person.getFirstName(), person.getLastName()));</span>
+            }
+<span class="nc" id="L42">        });</span>
+<span class="nc" id="L43">        return new ChildAlertResponse(children, householdMembers);</span>
+    }
+
+    private int calculateAge(Person person) {
+<span class="nc" id="L47">        String firstName = person.getFirstName();</span>
+<span class="nc" id="L48">        String lastName = person.getLastName();</span>
+
+<span class="nc" id="L50">        return rootRepository.getRoot().getMedicalrecords().stream()</span>
+<span class="nc" id="L51">                .filter(medicalRecord -&gt;</span>
+<span class="nc bnc" id="L52" title="All 4 branches missed.">                        medicalRecord.getFirstName().equals(firstName) &amp;&amp; medicalRecord.getLastName().equals(lastName)</span>
+<span class="nc" id="L53">                ).findFirst()</span>
+<span class="nc" id="L54">                .map(medicalRecord -&gt; {</span>
+<span class="nc" id="L55">                    return DateUtils.calculateAge(medicalRecord.getBirthdate());</span>
+<span class="nc" id="L56">                }).orElse(-1);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

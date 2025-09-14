@@ -1,5 +1,5 @@
 com\openclassrooms\safetynet\model\Person.class
-com\openclassrooms\safetynet\SafetynetApplication.class
 com\openclassrooms\safetynet\model\Medicalrecord.class
+com\openclassrooms\safetynet\SafetynetApplication.class
 com\openclassrooms\safetynet\model\Firestation.class
 com\openclassrooms\safetynet\model\Root.class

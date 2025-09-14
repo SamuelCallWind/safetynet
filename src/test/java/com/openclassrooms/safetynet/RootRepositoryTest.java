@@ -35,7 +35,16 @@ public class RootRepositoryTest {
         rootRepository.reload();
         rootRepository.addPerson(newPerson);
 
-        assertNotNull(rootRepository.getPersonByName("Watson"));
+        assertEquals(newPerson, rootRepository.getPersonByName("Watson").get(0));
+
+        //Removing the
+        rootRepository.removePerson(newPerson);
+        assertTrue(rootRepository.getPersonByName("Watson").isEmpty());
+    }
+
+    @Test
+    public void testDeleting_methodMustFindTheDataAndDeleteIt() {
+
     }
 
 

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RootRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">safetynet</a> &gt; <a href="index.source.html" class="el_package">com.openclassrooms.safetynet.repository</a> &gt; <span class="el_source">RootRepository.java</span></div><h1>RootRepository.java</h1><pre class="source lang-java linenums">package com.openclassrooms.safetynet.repository;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.openclassrooms.safetynet.model.Firestation;
+import com.openclassrooms.safetynet.model.Medicalrecord;
+import com.openclassrooms.safetynet.model.Person;
+import com.openclassrooms.safetynet.model.Root;
+import jakarta.annotation.PostConstruct;
+import lombok.Data;
+import org.springframework.stereotype.Repository;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+@Repository
+@Data
+public class RootRepository {
+
+    private Root root;
+    private final ObjectMapper mapper = new ObjectMapper();
+    private final String FILE_NAME = &quot;data.json&quot;;
+    private String fullPath = &quot;C:\\Users\\Samuel\\Documents\\JAVA\\safetynet\\src\\main\\java\\com\\openclassrooms\\safetynet\\data\\data.json&quot;;
+
+    @PostConstruct
+    public void initialize() {
+<span class="fc" id="L29">        reload();</span>
+<span class="fc" id="L30">    }</span>
+
+
+    public void reload() {
+        try {
+<span class="fc" id="L35">            root = mapper.readValue(new File(fullPath), Root.class);</span>
+<span class="fc" id="L36">            return;</span>
+<span class="nc" id="L37">        } catch (Exception e) {</span>
+<span class="nc" id="L38">            System.out.println(&quot;File data.json not found, reading from the original file in resources. \n&quot;);</span>
+        }
+        try {
+<span class="nc" id="L41">            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FILE_NAME);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">            if (inputStream == null) {</span>
+<span class="nc" id="L43">                System.out.println(&quot;Error while reading the value from the data.json file&quot;);</span>
+            }
+<span class="nc" id="L45">            root = mapper.readValue(inputStream, Root.class);</span>
+<span class="nc" id="L46">        } catch (IOException e) {</span>
+<span class="nc" id="L47">            System.out.println(&quot;Error while reading the value from the data.json file: &quot; + e);</span>
+<span class="nc" id="L48">        }</span>
+<span class="nc" id="L49">    }</span>
+
+
+    public List&lt;Person&gt; getPersonByName(String name) {
+<span class="fc" id="L53">        List&lt;Person&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L54">        root.getPersons().forEach(person -&gt; {</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">            if (person.getLastName().equals(name)) {</span>
+<span class="fc" id="L56">                result.add(person);</span>
+            }
+<span class="fc" id="L58">        });</span>
+<span class="fc" id="L59">        return result;</span>
+    }
+
+    public void addPerson(Person person) {
+<span class="fc" id="L63">        root.getPersons().add(person);</span>
+<span class="fc" id="L64">        save();</span>
+<span class="fc" id="L65">    }</span>
+
+    private void save() {
+        try {
+<span class="fc" id="L69">            mapper.writerWithDefaultPrettyPrinter()</span>
+<span class="fc" id="L70">                    .writeValue(new File(fullPath), root);</span>
+<span class="nc" id="L71">        } catch (Exception e) {</span>
+<span class="nc" id="L72">            System.out.println(&quot;Failed to save the data: &quot; + e.getMessage());</span>
+<span class="fc" id="L73">        }</span>
+<span class="fc" id="L74">        reload();</span>
+<span class="fc" id="L75">    }</span>
+
+    public void setFullPath(String fullPath) {
+<span class="fc" id="L78">        this.fullPath = fullPath;</span>
+<span class="fc" id="L79">    }</span>
+
+    public void removePerson(Person person) {
+<span class="fc" id="L82">        root.getPersons().remove(person);</span>
+<span class="fc" id="L83">        save();</span>
+<span class="fc" id="L84">    }</span>
+
+    public void modifyPerson(Person dataToBeChanged) {
+<span class="nc" id="L87">        List&lt;Person&gt; persons = root.getPersons();</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        for (int i = 0; i &lt; persons.size(); ++i) {</span>
+<span class="nc" id="L89">            Person currentPerson = persons.get(i);</span>
+<span class="nc bnc" id="L90" title="All 4 branches missed.">            if (currentPerson.getFirstName().equals(dataToBeChanged.getFirstName()) &amp;&amp; currentPerson.getLastName().equals(dataToBeChanged.getLastName())) {</span>
+<span class="nc" id="L91">                currentPerson.setAddress(dataToBeChanged.getAddress());</span>
+<span class="nc" id="L92">                currentPerson.setCity(dataToBeChanged.getCity());</span>
+<span class="nc" id="L93">                currentPerson.setPhone(dataToBeChanged.getPhone());</span>
+<span class="nc" id="L94">                currentPerson.setEmail(dataToBeChanged.getEmail());</span>
+<span class="nc" id="L95">                currentPerson.setZip(dataToBeChanged.getZip());</span>
+<span class="nc" id="L96">                break;</span>
+            }
+        }
+<span class="nc" id="L99">        save();</span>
+<span class="nc" id="L100">    }</span>
+
+    public void addFirestation(Firestation firestation) {
+<span class="nc" id="L103">        root.getFirestations().add(firestation);</span>
+<span class="nc" id="L104">        save();</span>
+<span class="nc" id="L105">    }</span>
+
+    public void removeFirestation(Firestation firestation) {
+        try {
+<span class="nc" id="L109">            root.getFirestations().remove(firestation);</span>
+<span class="nc" id="L110">        } catch (Exception e) {</span>
+<span class="nc" id="L111">            System.out.println(&quot;There was an error while trying to delete the firestation&quot; + e.getMessage());</span>
+<span class="nc" id="L112">        }</span>
+<span class="nc" id="L113">        save();</span>
+<span class="nc" id="L114">    }</span>
+
+    public void modifyFirestation(Firestation firestation) {
+        try {
+<span class="nc" id="L118">            root.getFirestations().stream()</span>
+<span class="nc" id="L119">                    .filter(station -&gt; station.getAddress().equals(firestation.getAddress()))</span>
+<span class="nc" id="L120">                    .findFirst()</span>
+<span class="nc" id="L121">                    .ifPresent(station -&gt; station.setStation(firestation.getStation()));</span>
+<span class="nc" id="L122">            save();</span>
+<span class="nc" id="L123">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L124">            throw new RuntimeException(e);</span>
+<span class="nc" id="L125">        }</span>
+<span class="nc" id="L126">    }</span>
+
+    public void addMedicalRecord(Medicalrecord medicalrecord) {
+<span class="nc" id="L129">        root.getMedicalrecords().add(medicalrecord);</span>
+<span class="nc" id="L130">        save();</span>
+<span class="nc" id="L131">    }</span>
+
+    public void removeMedicalRecord(String firstName, String lastName) {
+<span class="nc" id="L134">        Medicalrecord recordToBeRemoved = root.getMedicalrecords().stream()</span>
+<span class="nc bnc" id="L135" title="All 4 branches missed.">                .filter(record -&gt; record.getFirstName().equals(firstName) &amp;&amp; record.getLastName().equals(lastName))</span>
+<span class="nc" id="L136">                .findFirst()</span>
+<span class="nc" id="L137">                .orElse(null);</span>
+<span class="nc" id="L138">        root.getMedicalrecords().remove(recordToBeRemoved);</span>
+<span class="nc" id="L139">        save();</span>
+<span class="nc" id="L140">    }</span>
+
+    public void modifyMedicalRecord(Medicalrecord medicalrecord) {
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        for (int i = 0; i &lt; root.getMedicalrecords().size(); ++i) {</span>
+<span class="nc" id="L144">            Medicalrecord currentRecord = root.getMedicalrecords().get(i);</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">            if (currentRecord.getFirstName().equals(medicalrecord.getFirstName())</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">                    &amp;&amp; currentRecord.getLastName().equals(medicalrecord.getLastName())) {</span>
+<span class="nc" id="L147">                    currentRecord.setBirthdate(medicalrecord.getBirthdate());</span>
+<span class="nc" id="L148">                    currentRecord.setMedications(medicalrecord.getMedications());</span>
+<span class="nc" id="L149">                    currentRecord.setAllergies(medicalrecord.getAllergies());</span>
+            }
+        }
+<span class="nc" id="L152">        save();</span>
+<span class="nc" id="L153">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
