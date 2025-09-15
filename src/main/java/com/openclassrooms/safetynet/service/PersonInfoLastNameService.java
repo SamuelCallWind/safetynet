@@ -16,11 +16,15 @@ public class PersonInfoLastNameService {
     @Autowired
     RootRepository rootRepository;
 
+    public PersonInfoLastNameService() {}
+    public PersonInfoLastNameService(RootRepository rootRepository) {
+        this.rootRepository = rootRepository;
+    }
+
     public PersonInfoLastNameReponse getPersonInfoLastName(String lastName) {
         List<PersonInfoLastNameDto> result = new ArrayList<>();
         rootRepository.getRoot().getPersons().stream().filter(person -> person.getLastName().equals(lastName))
                 .forEach(person -> {
-                    System.out.println(person.getFirstName());
                     result.add(new PersonInfoLastNameDto(person.getFirstName(),
                             person.getLastName(),
                             person.getAddress(),
