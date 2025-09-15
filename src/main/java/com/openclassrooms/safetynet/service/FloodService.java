@@ -18,6 +18,11 @@ public class FloodService {
     @Autowired
     RootRepository rootRepository;
 
+    FloodService() {}
+    FloodService(RootRepository rootRepository) {
+        this.rootRepository = rootRepository;
+    }
+
     public FloodResponse getFloodResponse(List<Integer> stations) {
         List<HouseholdDto> houseHolds = new ArrayList<>();
         List<StationDto> stationDtos = new ArrayList<>();

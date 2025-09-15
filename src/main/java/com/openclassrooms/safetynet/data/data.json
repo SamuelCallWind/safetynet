@@ -183,14 +183,6 @@
     "phone" : "841-874-7458",
     "email" : "gramps@email.com",
     "zip" : 97451
-  }, {
-    "firstName" : "Bob",
-    "lastName" : "Kirkland",
-    "address" : "2 Rue st jean",
-    "city" : "Paris",
-    "phone" : "555-555-555",
-    "email" : "testemail@emailtest.com",
-    "zip" : 33333
   } ],
   "medicalrecords" : [ {
     "firstName" : "Jacob",

@@ -13,28 +13,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-<span class="fc" id="L16">public class FloodService {</span>
+public class FloodService {
 
     @Autowired
     RootRepository rootRepository;
 
+<span class="fc" id="L21">    FloodService() {}</span>
+<span class="fc" id="L22">    FloodService(RootRepository rootRepository) {</span>
+<span class="fc" id="L23">        this.rootRepository = rootRepository;</span>
+<span class="fc" id="L24">    }</span>
+
     public FloodResponse getFloodResponse(List&lt;Integer&gt; stations) {
-<span class="nc" id="L22">        List&lt;HouseholdDto&gt; houseHolds = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L23">        List&lt;StationDto&gt; stationDtos = new ArrayList&lt;&gt;();</span>
-<span class="nc bnc" id="L24" title="All 2 branches missed.">        for (Integer station : stations) {</span>
-<span class="nc" id="L25">            List&lt;FloodPersonDto&gt; floodPersonDtos = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L26">            PersonService.getPersonsByFirestationNumber(station, rootRepository)</span>
-<span class="nc" id="L27">                    .forEach(person -&gt; {</span>
-<span class="nc" id="L28">                        floodPersonDtos.add(new FloodPersonDto(person.getFirstName(), person.getLastName(),</span>
-<span class="nc" id="L29">                                MedicalRecordService.getMedicationFromFullName(person.getFirstName(), person.getLastName(), rootRepository),</span>
-<span class="nc" id="L30">                                MedicalRecordService.getAllergiesFromFullName(person.getFirstName(), person.getLastName(), rootRepository),</span>
-<span class="nc" id="L31">                                person.getPhone(),</span>
-<span class="nc" id="L32">                                DateUtils.calculateAge(MedicalRecordService.getBirthdateFromPersonsName(person.getFirstName(), person.getLastName(), rootRepository))));</span>
-<span class="nc" id="L33">                    });</span>
-<span class="nc" id="L34">            houseHolds.add(new HouseholdDto(floodPersonDtos));</span>
-<span class="nc" id="L35">            stationDtos.add(new StationDto(FirestationService.getFirestationAddressFromNumber(station, rootRepository) ,houseHolds));</span>
-<span class="nc" id="L36">        }</span>
-<span class="nc" id="L37">        return new FloodResponse(stationDtos);</span>
+<span class="fc" id="L27">        List&lt;HouseholdDto&gt; houseHolds = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L28">        List&lt;StationDto&gt; stationDtos = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        for (Integer station : stations) {</span>
+<span class="fc" id="L30">            List&lt;FloodPersonDto&gt; floodPersonDtos = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L31">            PersonService.getPersonsByFirestationNumber(station, rootRepository)</span>
+<span class="fc" id="L32">                    .forEach(person -&gt; {</span>
+<span class="fc" id="L33">                        floodPersonDtos.add(new FloodPersonDto(person.getFirstName(), person.getLastName(),</span>
+<span class="fc" id="L34">                                MedicalRecordService.getMedicationFromFullName(person.getFirstName(), person.getLastName(), rootRepository),</span>
+<span class="fc" id="L35">                                MedicalRecordService.getAllergiesFromFullName(person.getFirstName(), person.getLastName(), rootRepository),</span>
+<span class="fc" id="L36">                                person.getPhone(),</span>
+<span class="fc" id="L37">                                DateUtils.calculateAge(MedicalRecordService.getBirthdateFromPersonsName(person.getFirstName(), person.getLastName(), rootRepository))));</span>
+<span class="fc" id="L38">                    });</span>
+<span class="fc" id="L39">            houseHolds.add(new HouseholdDto(floodPersonDtos));</span>
+<span class="fc" id="L40">            stationDtos.add(new StationDto(FirestationService.getFirestationAddressFromNumber(station, rootRepository) ,houseHolds));</span>
+<span class="fc" id="L41">        }</span>
+<span class="fc" id="L42">        return new FloodResponse(stationDtos);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
