@@ -14,6 +14,11 @@ public class FirestationService {
     @Autowired
     RootRepository rootRepository;
 
+    FirestationService() {}
+    FirestationService(RootRepository rootRepository) {
+        this.rootRepository = rootRepository;
+    }
+
     public static int getFirestationNumberFromAddress(String address, RootRepository rootRepository) {
         Firestation firestation = rootRepository.getRoot().getFirestations().stream()
                 .filter(f -> f.getAddress().equals(address))

@@ -15,14 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class FireStationServiceTest {
 
-    @Autowired
-    FirestationService firestationService;
+    private FirestationService firestationService;
+    private Firestation firestation;
+
     @Mock
     RootRepository rootRepository;
     @Mock
@@ -30,7 +32,8 @@ public class FireStationServiceTest {
 
     @BeforeEach
     public void setup() {
-
+        firestationService = new FirestationService(rootRepository);
+        firestation = new Firestation("123 Baker st", 9);
     }
 
     @Test
@@ -42,5 +45,15 @@ public class FireStationServiceTest {
 
         assertEquals("123 Baker st", result);
     }
+
+    @Test
+    public void addFirestationTest_shouldThrowRuntimeError() {
+        when(rootRepository.getRoot()).thenReturn(root);
+        when(root.getFirestations()).thenReturn(List.of(firestation));
+
+        assertThrows(RuntimeException.class, () -> firestationService.addFirestation(new Firestation("123 Baker st", 9)));
+    }
+
+    
 
 }

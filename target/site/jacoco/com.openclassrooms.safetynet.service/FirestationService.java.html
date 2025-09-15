@@ -22,10 +22,10 @@ import java.util.List;
     }
 
     public static String getFirestationAddressFromNumber(Integer stationNumber, RootRepository rootRepository) {
-<span class="nc" id="L25">        Firestation firestation = rootRepository.getRoot().getFirestations().stream()</span>
-<span class="nc bnc" id="L26" title="All 2 branches missed.">                .filter(f -&gt; f.getStation() == stationNumber)</span>
-<span class="nc" id="L27">                .findAny().orElse(null);</span>
-<span class="nc bnc" id="L28" title="All 2 branches missed.">        return (firestation != null) ? firestation.getAddress() : &quot;Not found&quot;;</span>
+<span class="fc" id="L25">        Firestation firestation = rootRepository.getRoot().getFirestations().stream()</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">                .filter(f -&gt; f.getStation() == stationNumber)</span>
+<span class="fc" id="L27">                .findAny().orElse(null);</span>
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        return (firestation != null) ? firestation.getAddress() : &quot;Not found&quot;;</span>
     }
 
     public void addFirestation(Firestation firestation) {
