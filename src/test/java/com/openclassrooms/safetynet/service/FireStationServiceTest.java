@@ -16,8 +16,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class FireStationServiceTest {
@@ -54,6 +53,18 @@ public class FireStationServiceTest {
         assertThrows(RuntimeException.class, () -> firestationService.addFirestation(new Firestation("123 Baker st", 9)));
     }
 
-    
+    @Test
+    public void addFirestationTest_shouldNotThrowError() {
+        Firestation mockOfDatabase = new Firestation("does not exist 55", 15);
+        when(rootRepository.getRoot()).thenReturn(root);
+        when(root.getFirestations()).thenReturn(List.of(mockOfDatabase));
+        doNothing().when(rootRepository).addFirestation(firestation);
+
+        firestationService.addFirestation(firestation);
+
+        verify(rootRepository).addFirestation(firestation);
+    }
+
+
 
 }
