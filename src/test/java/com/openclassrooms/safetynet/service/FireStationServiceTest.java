@@ -1,0 +1,46 @@
+package com.openclassrooms.safetynet.service;
+
+import com.openclassrooms.safetynet.model.Firestation;
+import com.openclassrooms.safetynet.model.Root;
+import com.openclassrooms.safetynet.repository.RootRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+public class FireStationServiceTest {
+
+    @Autowired
+    FirestationService firestationService;
+    @Mock
+    RootRepository rootRepository;
+    @Mock
+    Root root;
+
+    @BeforeEach
+    public void setup() {
+
+    }
+
+    @Test
+    public void getFirestationAddressFromNumber() {
+        when(rootRepository.getRoot()).thenReturn(root);
+        when(root.getFirestations()).thenReturn(new ArrayList<>(List.of(new Firestation("123 Baker st", 9))));
+
+        String result = FirestationService.getFirestationAddressFromNumber(9, rootRepository);
+
+        assertEquals("123 Baker st", result);
+    }
+
+}

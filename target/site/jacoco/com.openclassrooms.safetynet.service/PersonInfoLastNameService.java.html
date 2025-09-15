@@ -11,27 +11,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-<span class="fc" id="L14">public class PersonInfoLastNameService {</span>
+public class PersonInfoLastNameService {
 
     @Autowired
     RootRepository rootRepository;
 
+<span class="fc" id="L19">    public PersonInfoLastNameService() {}</span>
+<span class="fc" id="L20">    public PersonInfoLastNameService(RootRepository rootRepository) {</span>
+<span class="fc" id="L21">        this.rootRepository = rootRepository;</span>
+<span class="fc" id="L22">    }</span>
+
     public PersonInfoLastNameReponse getPersonInfoLastName(String lastName) {
-<span class="nc" id="L20">        List&lt;PersonInfoLastNameDto&gt; result = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L21">        rootRepository.getRoot().getPersons().stream().filter(person -&gt; person.getLastName().equals(lastName))</span>
-<span class="nc" id="L22">                .forEach(person -&gt; {</span>
-<span class="nc" id="L23">                    System.out.println(person.getFirstName());</span>
-<span class="nc" id="L24">                    result.add(new PersonInfoLastNameDto(person.getFirstName(),</span>
-<span class="nc" id="L25">                            person.getLastName(),</span>
-<span class="nc" id="L26">                            person.getAddress(),</span>
-<span class="nc" id="L27">                            DateUtils.calculateAge(MedicalRecordService.getBirthdateFromPersonsName(person.getFirstName(),</span>
-<span class="nc" id="L28">                                    person.getLastName(), rootRepository)),</span>
-<span class="nc" id="L29">                            person.getEmail(),</span>
-<span class="nc" id="L30">                            MedicalRecordService.getMedicationFromFullName(person.getFirstName(), person.getLastName(), rootRepository),</span>
-<span class="nc" id="L31">                            MedicalRecordService.getAllergiesFromFullName(person.getFirstName(), person.getLastName(), rootRepository)</span>
+<span class="fc" id="L25">        List&lt;PersonInfoLastNameDto&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L26">        rootRepository.getRoot().getPersons().stream().filter(person -&gt; person.getLastName().equals(lastName))</span>
+<span class="fc" id="L27">                .forEach(person -&gt; {</span>
+<span class="fc" id="L28">                    result.add(new PersonInfoLastNameDto(person.getFirstName(),</span>
+<span class="fc" id="L29">                            person.getLastName(),</span>
+<span class="fc" id="L30">                            person.getAddress(),</span>
+<span class="fc" id="L31">                            DateUtils.calculateAge(MedicalRecordService.getBirthdateFromPersonsName(person.getFirstName(),</span>
+<span class="fc" id="L32">                                    person.getLastName(), rootRepository)),</span>
+<span class="fc" id="L33">                            person.getEmail(),</span>
+<span class="fc" id="L34">                            MedicalRecordService.getMedicationFromFullName(person.getFirstName(), person.getLastName(), rootRepository),</span>
+<span class="fc" id="L35">                            MedicalRecordService.getAllergiesFromFullName(person.getFirstName(), person.getLastName(), rootRepository)</span>
                     ));
-<span class="nc" id="L33">                });</span>
-<span class="nc" id="L34">        return new PersonInfoLastNameReponse(result);</span>
+<span class="fc" id="L37">                });</span>
+<span class="fc" id="L38">        return new PersonInfoLastNameReponse(result);</span>
     }
 
 
