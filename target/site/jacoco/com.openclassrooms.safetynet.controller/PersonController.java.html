@@ -19,7 +19,7 @@ import java.util.List;
 
     @GetMapping(&quot;/person&quot;)
     public List&lt;Person&gt; getPersonByLastName(@RequestParam String lastName) {
-<span class="nc" id="L22">        return personService.getPersonByLastName(lastName);</span>
+<span class="fc" id="L22">        return personService.getPersonByLastName(lastName);</span>
     }
 
     @PostMapping(&quot;/person&quot;)
@@ -48,7 +48,7 @@ import java.util.List;
 
     @PutMapping(&quot;/person&quot;)
     public void modifyPerson(@RequestBody Person person) {
-<span class="nc" id="L51">        personService.modifyPerson(person);</span>
-<span class="nc" id="L52">    }</span>
+<span class="fc" id="L51">        personService.modifyPerson(person);</span>
+<span class="fc" id="L52">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

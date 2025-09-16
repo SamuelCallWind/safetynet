@@ -114,7 +114,7 @@ public class RootRepositoryTest {
         assertEquals(200, rootRepository.getRoot().getFirestations()
                 .get(rootRepository.getRoot().getFirestations().size()-1).getStation());
 
-        rootRepository.removeFirestation(firestation);
+        rootRepository.removeFirestation(firestationReplacement);
     }
 
 

@@ -3,7 +3,7 @@ safetynet,com.openclassrooms.safetynet.util,DateUtils,3,13,0,0,1,3,1,2,1,2
 safetynet,com.openclassrooms.safetynet.model,Person,0,27,0,0,0,10,0,2,0,2
 safetynet,com.openclassrooms.safetynet.model,Medicalrecord,0,21,0,0,0,9,0,2,0,2
 safetynet,com.openclassrooms.safetynet.model,Firestation,0,12,0,0,0,5,0,2,0,2
-safetynet,com.openclassrooms.safetynet.repository,RootRepository,161,152,12,8,42,42,16,12,9,9
+safetynet,com.openclassrooms.safetynet.repository,RootRepository,116,197,12,8,28,56,11,17,4,14
 safetynet,com.openclassrooms.safetynet.dto,FloodPersonDto,0,21,0,0,0,8,0,1,0,1
 safetynet,com.openclassrooms.safetynet.dto,StationDto,0,9,0,0,0,4,0,1,0,1
 safetynet,com.openclassrooms.safetynet.dto,CommunityEmailResponse,6,0,0,0,3,0,1,0,1,0
@@ -27,7 +27,7 @@ safetynet,com.openclassrooms.safetynet.service,PhoneAlertService,41,3,2,0,9,1,4,
 safetynet,com.openclassrooms.safetynet.service,FloodService,0,99,0,2,0,20,0,5,0,4
 safetynet,com.openclassrooms.safetynet.service,ChildAlertService,0,114,1,5,0,24,1,9,0,7
 safetynet,com.openclassrooms.safetynet.controller,PersonInfoLastNameController,5,3,0,0,1,1,1,1,1,1
-safetynet,com.openclassrooms.safetynet.controller,PersonController,52,3,0,0,19,1,4,1,4,1
+safetynet,com.openclassrooms.safetynet.controller,PersonController,42,13,0,0,16,4,2,3,2,3
 safetynet,com.openclassrooms.safetynet.controller,FirestationController,20,3,0,0,7,1,4,1,4,1
 safetynet,com.openclassrooms.safetynet.controller,MedicalRecordController,18,3,0,0,6,1,3,1,3,1
 safetynet,com.openclassrooms.safetynet.controller,FloodController,5,3,0,0,1,1,1,1,1,1
