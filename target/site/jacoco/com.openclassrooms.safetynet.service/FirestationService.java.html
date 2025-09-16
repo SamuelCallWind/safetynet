@@ -9,39 +9,44 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-<span class="fc" id="L12">public class FirestationService {</span>
+public class FirestationService {
 
     @Autowired
     RootRepository rootRepository;
 
+<span class="fc" id="L17">    FirestationService() {}</span>
+<span class="fc" id="L18">    FirestationService(RootRepository rootRepository) {</span>
+<span class="fc" id="L19">        this.rootRepository = rootRepository;</span>
+<span class="fc" id="L20">    }</span>
+
     public static int getFirestationNumberFromAddress(String address, RootRepository rootRepository) {
-<span class="fc" id="L18">        Firestation firestation = rootRepository.getRoot().getFirestations().stream()</span>
-<span class="fc" id="L19">                .filter(f -&gt; f.getAddress().equals(address))</span>
-<span class="fc" id="L20">                .findAny().orElse(null);</span>
-<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        return (firestation != null) ? firestation.getStation() : -1;</span>
+<span class="fc" id="L23">        Firestation firestation = rootRepository.getRoot().getFirestations().stream()</span>
+<span class="fc" id="L24">                .filter(f -&gt; f.getAddress().equals(address))</span>
+<span class="fc" id="L25">                .findAny().orElse(null);</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        return (firestation != null) ? firestation.getStation() : -1;</span>
     }
 
     public static String getFirestationAddressFromNumber(Integer stationNumber, RootRepository rootRepository) {
-<span class="fc" id="L25">        Firestation firestation = rootRepository.getRoot().getFirestations().stream()</span>
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">                .filter(f -&gt; f.getStation() == stationNumber)</span>
-<span class="fc" id="L27">                .findAny().orElse(null);</span>
-<span class="pc bpc" id="L28" title="1 of 2 branches missed.">        return (firestation != null) ? firestation.getAddress() : &quot;Not found&quot;;</span>
+<span class="fc" id="L30">        Firestation firestation = rootRepository.getRoot().getFirestations().stream()</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">                .filter(f -&gt; f.getStation() == stationNumber)</span>
+<span class="fc" id="L32">                .findAny().orElse(null);</span>
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        return (firestation != null) ? firestation.getAddress() : &quot;Not found&quot;;</span>
     }
 
     public void addFirestation(Firestation firestation) {
-<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (rootRepository.getRoot().getFirestations().contains(firestation)) {</span>
-<span class="nc" id="L33">            throw new RuntimeException(&quot;The firestation is already inside the database&quot;);</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (rootRepository.getRoot().getFirestations().contains(firestation)) {</span>
+<span class="fc" id="L38">            throw new RuntimeException(&quot;The firestation is already inside the database&quot;);</span>
         } else {
-<span class="nc" id="L35">            rootRepository.addFirestation(firestation);</span>
+<span class="fc" id="L40">            rootRepository.addFirestation(firestation);</span>
         }
-<span class="nc" id="L37">    }</span>
+<span class="fc" id="L42">    }</span>
 
     public void removeFirestation(Firestation firestation) {
-<span class="nc" id="L40">        rootRepository.removeFirestation(firestation);</span>
-<span class="nc" id="L41">    }</span>
+<span class="fc" id="L45">        rootRepository.removeFirestation(firestation);</span>
+<span class="fc" id="L46">    }</span>
 
     public void modifyFirestation(Firestation firestation) {
-<span class="nc" id="L44">        rootRepository.modifyFirestation(firestation);</span>
-<span class="nc" id="L45">    }</span>
+<span class="fc" id="L49">        rootRepository.modifyFirestation(firestation);</span>
+<span class="fc" id="L50">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

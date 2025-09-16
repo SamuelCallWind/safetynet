@@ -65,6 +65,19 @@ public class FireStationServiceTest {
         verify(rootRepository).addFirestation(firestation);
     }
 
+    @Test
+    public void removeFirestation_shouldNotThrowError() {
+        doNothing().when(rootRepository).removeFirestation(firestation);
+        firestationService.removeFirestation(firestation);
+        verify(rootRepository).removeFirestation(firestation);
+    }
+
+    @Test
+    public void modifyFirestation_shouldNotThrowError() {
+        doNothing().when(rootRepository).modifyFirestation(firestation);
+        firestationService.modifyFirestation(firestation);
+        verify(rootRepository).modifyFirestation(firestation);
+    }
 
 
 }

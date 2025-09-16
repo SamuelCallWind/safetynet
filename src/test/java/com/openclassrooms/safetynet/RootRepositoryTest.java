@@ -7,29 +7,30 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class RootRepositoryTest {
 
     RootRepository rootRepository;
+    private Person newPerson;
 
     @BeforeEach
     public void resetRootRepository() {
         rootRepository = new RootRepository();
         rootRepository.reload();
+        newPerson = new Person("John",
+                "Watson",
+                "221 Baker st",
+                "London",
+                "555-555-555",
+                "johnwatsontest@email.com",
+                5000);
+
     }
 
     @Test
     public void testSaving_newPersonDataMustBeSavedAndReturn() {
-        Person newPerson = new Person();
-        newPerson.setFirstName("John");
-        newPerson.setLastName("Watson");
-        newPerson.setAddress("221 baker st");
-        newPerson.setCity("London");
-        newPerson.setPhone("555-555-555");
-        newPerson.setZip(50000);
-        newPerson.setEmail("johnwatsontest@email.com");
-
 
         rootRepository.setFullPath("C:\\Users\\Samuel\\Documents\\JAVA\\safetynet\\src\\main\\java\\com\\openclassrooms\\safetynet\\data\\dataTest.json");
         rootRepository.reload();
@@ -40,6 +41,11 @@ public class RootRepositoryTest {
         //Removing the
         rootRepository.removePerson(newPerson);
         assertTrue(rootRepository.getPersonByName("Watson").isEmpty());
+    }
+
+    @Test
+    public void testSavingPerson_returnAnError() {
+        when(rootRepository.)
     }
 
     @Test
