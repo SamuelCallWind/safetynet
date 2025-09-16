@@ -68,11 +68,26 @@ public class RootRepositoryTest {
         assertEquals(fakeRoot, rootRepository.getRoot());
     }
 
-
     @Test
-    public void testDeleting_methodMustFindTheDataAndDeleteIt() {
+    public void testModifyingPerson_shouldNotThrowError() {
+        rootRepository.setFullPath("C:\\Users\\Samuel\\Documents\\JAVA\\safetynet\\src\\main\\java\\com\\openclassrooms\\safetynet\\data\\dataTest.json");
+        rootRepository.reload();
+        rootRepository.addPerson(newPerson);
+        Person newJohn = new Person("John",
+                "Watson",
+                "555 baker st",
+                "Dunquerque",
+                "111-111-111",
+                "notjohnwatsonanymore@email.com",
+                00000);
+
+        rootRepository.modifyPerson(newJohn);
+        assertEquals("111-111-111", rootRepository.getPersonByName("Watson").get(0).getPhone());
+
+        rootRepository.removePerson(newJohn);
 
     }
+
 
 
 }
