@@ -1,6 +1,7 @@
 package com.openclassrooms.safetynet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.openclassrooms.safetynet.model.Firestation;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.model.Root;
 import com.openclassrooms.safetynet.repository.RootRepository;
@@ -22,6 +23,7 @@ public class RootRepositoryTest {
 
     RootRepository rootRepository;
     private Person newPerson;
+    private Firestation firestation;
 
     @Mock
     ObjectMapper mockMapper;
@@ -37,7 +39,6 @@ public class RootRepositoryTest {
                 "555-555-555",
                 "johnwatsontest@email.com",
                 5000);
-
     }
 
     @Test
@@ -85,7 +86,19 @@ public class RootRepositoryTest {
         assertEquals("111-111-111", rootRepository.getPersonByName("Watson").get(0).getPhone());
 
         rootRepository.removePerson(newJohn);
+    }
 
+    @Test
+    public void addFirestationTest() {
+        rootRepository.setFullPath("C:\\Users\\Samuel\\Documents\\JAVA\\safetynet\\src\\main\\java\\com\\openclassrooms\\safetynet\\data\\dataTest.json");
+        rootRepository.reload();
+        firestation = new Firestation("Untrue address 25", 10);
+
+        rootRepository.addFirestation(firestation);
+        assertEquals("Untrue address 25", rootRepository.getRoot().getFirestations()
+                .get(rootRepository.getRoot().getFirestations().size()-1).getAddress());
+
+        rootRepository.removeFirestation(firestation);
     }
 
 
