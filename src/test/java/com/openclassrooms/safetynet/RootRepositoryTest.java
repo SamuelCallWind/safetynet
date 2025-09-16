@@ -101,6 +101,22 @@ public class RootRepositoryTest {
         rootRepository.removeFirestation(firestation);
     }
 
+    @Test
+    public void modifyFirestationTest() {
+        rootRepository.setFullPath("C:\\Users\\Samuel\\Documents\\JAVA\\safetynet\\src\\main\\java\\com\\openclassrooms\\safetynet\\data\\dataTest.json");
+        rootRepository.reload();
+        firestation = new Firestation("Untrue address 25", 10);
+        Firestation firestationReplacement = new Firestation("Untrue address 25", 200);
+
+        rootRepository.addFirestation(firestation);
+        rootRepository.modifyFirestation(firestationReplacement);
+
+        assertEquals(200, rootRepository.getRoot().getFirestations()
+                .get(rootRepository.getRoot().getFirestations().size()-1).getStation());
+
+        rootRepository.removeFirestation(firestation);
+    }
+
 
 
 }
