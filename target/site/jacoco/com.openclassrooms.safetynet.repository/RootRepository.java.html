@@ -127,30 +127,30 @@ public class RootRepository {
 <span class="fc" id="L127">    }</span>
 
     public void addMedicalRecord(Medicalrecord medicalrecord) {
-<span class="nc" id="L130">        root.getMedicalrecords().add(medicalrecord);</span>
-<span class="nc" id="L131">        save();</span>
-<span class="nc" id="L132">    }</span>
+<span class="fc" id="L130">        root.getMedicalrecords().add(medicalrecord);</span>
+<span class="fc" id="L131">        save();</span>
+<span class="fc" id="L132">    }</span>
 
     public void removeMedicalRecord(String firstName, String lastName) {
-<span class="nc" id="L135">        Medicalrecord recordToBeRemoved = root.getMedicalrecords().stream()</span>
-<span class="nc bnc" id="L136" title="All 4 branches missed.">                .filter(record -&gt; record.getFirstName().equals(firstName) &amp;&amp; record.getLastName().equals(lastName))</span>
-<span class="nc" id="L137">                .findFirst()</span>
-<span class="nc" id="L138">                .orElse(null);</span>
-<span class="nc" id="L139">        root.getMedicalrecords().remove(recordToBeRemoved);</span>
-<span class="nc" id="L140">        save();</span>
-<span class="nc" id="L141">    }</span>
+<span class="fc" id="L135">        Medicalrecord recordToBeRemoved = root.getMedicalrecords().stream()</span>
+<span class="pc bpc" id="L136" title="1 of 4 branches missed.">                .filter(record -&gt; record.getFirstName().equals(firstName) &amp;&amp; record.getLastName().equals(lastName))</span>
+<span class="fc" id="L137">                .findFirst()</span>
+<span class="fc" id="L138">                .orElse(null);</span>
+<span class="fc" id="L139">        root.getMedicalrecords().remove(recordToBeRemoved);</span>
+<span class="fc" id="L140">        save();</span>
+<span class="fc" id="L141">    }</span>
 
     public void modifyMedicalRecord(Medicalrecord medicalrecord) {
-<span class="nc bnc" id="L144" title="All 2 branches missed.">        for (int i = 0; i &lt; root.getMedicalrecords().size(); ++i) {</span>
-<span class="nc" id="L145">            Medicalrecord currentRecord = root.getMedicalrecords().get(i);</span>
-<span class="nc bnc" id="L146" title="All 2 branches missed.">            if (currentRecord.getFirstName().equals(medicalrecord.getFirstName())</span>
-<span class="nc bnc" id="L147" title="All 2 branches missed.">                    &amp;&amp; currentRecord.getLastName().equals(medicalrecord.getLastName())) {</span>
-<span class="nc" id="L148">                    currentRecord.setBirthdate(medicalrecord.getBirthdate());</span>
-<span class="nc" id="L149">                    currentRecord.setMedications(medicalrecord.getMedications());</span>
-<span class="nc" id="L150">                    currentRecord.setAllergies(medicalrecord.getAllergies());</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">        for (int i = 0; i &lt; root.getMedicalrecords().size(); ++i) {</span>
+<span class="fc" id="L145">            Medicalrecord currentRecord = root.getMedicalrecords().get(i);</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">            if (currentRecord.getFirstName().equals(medicalrecord.getFirstName())</span>
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">                    &amp;&amp; currentRecord.getLastName().equals(medicalrecord.getLastName())) {</span>
+<span class="fc" id="L148">                    currentRecord.setBirthdate(medicalrecord.getBirthdate());</span>
+<span class="fc" id="L149">                    currentRecord.setMedications(medicalrecord.getMedications());</span>
+<span class="fc" id="L150">                    currentRecord.setAllergies(medicalrecord.getAllergies());</span>
             }
         }
-<span class="nc" id="L153">        save();</span>
-<span class="nc" id="L154">    }</span>
+<span class="fc" id="L153">        save();</span>
+<span class="fc" id="L154">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

@@ -2,6 +2,7 @@ package com.openclassrooms.safetynet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.openclassrooms.safetynet.model.Firestation;
+import com.openclassrooms.safetynet.model.Medicalrecord;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.model.Root;
 import com.openclassrooms.safetynet.repository.RootRepository;
@@ -13,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -115,6 +118,29 @@ public class RootRepositoryTest {
                 .get(rootRepository.getRoot().getFirestations().size()-1).getStation());
 
         rootRepository.removeFirestation(firestationReplacement);
+    }
+
+    @Test
+    public void modifyMedicalRecord() {
+        rootRepository.setFullPath("C:\\Users\\Samuel\\Documents\\JAVA\\safetynet\\src\\main\\java\\com\\openclassrooms\\safetynet\\data\\dataTest.json");
+        rootRepository.reload();
+        rootRepository.addMedicalRecord(new Medicalrecord("Anthony",
+                "Dubois",
+                "08/08/1995",
+                new ArrayList<>(),
+                new ArrayList<>()));
+        Medicalrecord modifiedData = new Medicalrecord("Anthony",
+                "Dubois",
+                "01/01/1990",
+                List.of("A new Med"),
+                List.of("A new allergy"));
+        rootRepository.modifyMedicalRecord(modifiedData);
+
+        int sizeOfMedicalRecords = rootRepository.getRoot().getMedicalrecords().size() - 1;
+
+        assertEquals("A new Med", rootRepository.getRoot().getMedicalrecords().get(sizeOfMedicalRecords).getMedications().get(0));
+
+        rootRepository.removeMedicalRecord("Anthony", "Dubois");
     }
 
 
