@@ -1,13 +1,21 @@
 package com.openclassrooms.safetynet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.openclassrooms.safetynet.model.Person;
+import com.openclassrooms.safetynet.model.Root;
 import com.openclassrooms.safetynet.repository.RootRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class RootRepositoryTest {
@@ -15,10 +23,13 @@ public class RootRepositoryTest {
     RootRepository rootRepository;
     private Person newPerson;
 
+    @Mock
+    ObjectMapper mockMapper;
+
     @BeforeEach
     public void resetRootRepository() {
         rootRepository = new RootRepository();
-        rootRepository.reload();
+        // rootRepository.reload();
         newPerson = new Person("John",
                 "Watson",
                 "221 Baker st",
@@ -30,23 +41,33 @@ public class RootRepositoryTest {
     }
 
     @Test
-    public void testSaving_newPersonDataMustBeSavedAndReturn() {
-
+    public void testSaving_newPersonDataMustBeSavedAndReturnThenDeleted() {
         rootRepository.setFullPath("C:\\Users\\Samuel\\Documents\\JAVA\\safetynet\\src\\main\\java\\com\\openclassrooms\\safetynet\\data\\dataTest.json");
         rootRepository.reload();
         rootRepository.addPerson(newPerson);
 
         assertEquals(newPerson, rootRepository.getPersonByName("Watson").get(0));
 
-        //Removing the
         rootRepository.removePerson(newPerson);
         assertTrue(rootRepository.getPersonByName("Watson").isEmpty());
     }
 
     @Test
-    public void testSavingPerson_returnAnError() {
-        when(rootRepository.)
+    void testReloadFallsBackToClasspath() throws Exception {
+        rootRepository.setMapper(mockMapper);
+
+        when(mockMapper.readValue(any(File.class), eq(Root.class)))
+                .thenThrow(new IOException("Error while reading the value"));
+
+        Root fakeRoot = new Root();
+        when(mockMapper.readValue(any(InputStream.class), eq(Root.class)))
+                .thenReturn(fakeRoot);
+
+        rootRepository.reload();
+
+        assertEquals(fakeRoot, rootRepository.getRoot());
     }
+
 
     @Test
     public void testDeleting_methodMustFindTheDataAndDeleteIt() {

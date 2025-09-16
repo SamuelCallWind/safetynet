@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.openclassrooms.safetynet.RootRepositoryTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.145 s -- in com.openclassrooms.safetynet.RootRepositoryTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.622 s -- in com.openclassrooms.safetynet.RootRepositoryTest

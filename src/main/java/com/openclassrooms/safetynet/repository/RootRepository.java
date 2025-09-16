@@ -20,8 +20,8 @@ import java.util.List;
 public class RootRepository {
 
     private Root root;
-    private final ObjectMapper mapper = new ObjectMapper();
-    private final String FILE_NAME = "data.json";
+    private ObjectMapper mapper = new ObjectMapper();
+    private String FILE_NAME = "data.json";
     private String fullPath = "C:\\Users\\Samuel\\Documents\\JAVA\\safetynet\\src\\main\\java\\com\\openclassrooms\\safetynet\\data\\data.json";
 
     @PostConstruct
@@ -36,16 +36,17 @@ public class RootRepository {
             return;
         } catch (Exception e) {
             System.out.println("File data.json not found, reading from the original file in resources. \n");
-        }
-        try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FILE_NAME);
-            if (inputStream == null) {
-                System.out.println("Error while reading the value from the data.json file");
+            try {
+                InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FILE_NAME);
+                if (inputStream == null) {
+                    System.out.println("Error while reading the value from the data.json file");
+                }
+                root = mapper.readValue(inputStream, Root.class);
+            } catch (IOException err) {
+                System.out.println("Error while reading the value from the data.json file: " + err);
             }
-            root = mapper.readValue(inputStream, Root.class);
-        } catch (IOException e) {
-            System.out.println("Error while reading the value from the data.json file: " + e);
         }
+
     }
 
 
