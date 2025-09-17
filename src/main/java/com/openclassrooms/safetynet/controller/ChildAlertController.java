@@ -3,6 +3,7 @@ package com.openclassrooms.safetynet.controller;
 import com.openclassrooms.safetynet.dto.ChildAlertResponse;
 import com.openclassrooms.safetynet.repository.RootRepository;
 import com.openclassrooms.safetynet.service.ChildAlertService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 public class ChildAlertController {
 
@@ -18,6 +20,7 @@ public class ChildAlertController {
 
     @GetMapping("/childAlert")
     public ChildAlertResponse getChildAlert(@RequestParam String address) {
+        log.info("GET method called for address: {}", address);
         return childAlertService.getChildAlert(address);
     }
 }

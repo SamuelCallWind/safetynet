@@ -4,12 +4,14 @@ import com.openclassrooms.safetynet.dto.PersonInfoLastNameDto;
 import com.openclassrooms.safetynet.dto.PersonInfoLastNameReponse;
 import com.openclassrooms.safetynet.repository.RootRepository;
 import com.openclassrooms.safetynet.util.DateUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class PersonInfoLastNameService {
 
@@ -23,18 +25,22 @@ public class PersonInfoLastNameService {
 
     public PersonInfoLastNameReponse getPersonInfoLastName(String lastName) {
         List<PersonInfoLastNameDto> result = new ArrayList<>();
-        rootRepository.getRoot().getPersons().stream().filter(person -> person.getLastName().equals(lastName))
-                .forEach(person -> {
-                    result.add(new PersonInfoLastNameDto(person.getFirstName(),
-                            person.getLastName(),
-                            person.getAddress(),
-                            DateUtils.calculateAge(MedicalRecordService.getBirthdateFromPersonsName(person.getFirstName(),
-                                    person.getLastName(), rootRepository)),
-                            person.getEmail(),
-                            MedicalRecordService.getMedicationFromFullName(person.getFirstName(), person.getLastName(), rootRepository),
-                            MedicalRecordService.getAllergiesFromFullName(person.getFirstName(), person.getLastName(), rootRepository)
-                    ));
-                });
+        try {
+            rootRepository.getRoot().getPersons().stream().filter(person -> person.getLastName().equals(lastName))
+                    .forEach(person -> {
+                        result.add(new PersonInfoLastNameDto(person.getFirstName(),
+                                person.getLastName(),
+                                person.getAddress(),
+                                DateUtils.calculateAge(MedicalRecordService.getBirthdateFromPersonsName(person.getFirstName(),
+                                        person.getLastName(), rootRepository)),
+                                person.getEmail(),
+                                MedicalRecordService.getMedicationFromFullName(person.getFirstName(), person.getLastName(), rootRepository),
+                                MedicalRecordService.getAllergiesFromFullName(person.getFirstName(), person.getLastName(), rootRepository)
+                        ));
+                    });
+        } catch (RuntimeException e) {
+            log.error("Failed to getPersonInfoLastName from name: {}", lastName, e);
+        }
         return new PersonInfoLastNameReponse(result);
     }
 

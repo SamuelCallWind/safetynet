@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.openclassrooms.safetynet</groupId>
 	<artifactId>safetynet</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<name>safetynet</name>
 	<description>SafetyNet is a company that connects individuals with emergency services</description>
 	<url/>

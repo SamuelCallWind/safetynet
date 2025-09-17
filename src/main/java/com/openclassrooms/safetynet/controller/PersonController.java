@@ -41,7 +41,7 @@ public class PersonController {
 
     @DeleteMapping("/person")
     public void deletePerson(@RequestBody PersonDto personDto) {
-        log.info("DELETE method called with lastName={}, {}", personDto.getLastName(), new Date());
+        log.info("DELETE method called with lastName={}", personDto.getLastName());
         personService.removePerson(new Person(personDto.getFirstName(),
                 personDto.getLastName(),
                 personDto.getAddress(),
@@ -54,7 +54,7 @@ public class PersonController {
 
     @PutMapping("/person")
     public void modifyPerson(@RequestBody Person person) {
-        log.info("PUT method called with lastName={}, {}", person.getLastName(), new Date());
+        log.info("PUT method called with lastName={}", person.getLastName());
         personService.modifyPerson(person);
     }
 }
