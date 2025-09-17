@@ -3,6 +3,7 @@
 import com.openclassrooms.safetynet.dto.ChildAlertResponse;
 import com.openclassrooms.safetynet.repository.RootRepository;
 import com.openclassrooms.safetynet.service.ChildAlertService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,15 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+<span class="fc" id="L14">@Slf4j</span>
 @RestController
-<span class="fc" id="L14">public class ChildAlertController {</span>
+<span class="fc" id="L16">public class ChildAlertController {</span>
 
     @Autowired
     ChildAlertService childAlertService;
 
     @GetMapping(&quot;/childAlert&quot;)
     public ChildAlertResponse getChildAlert(@RequestParam String address) {
-<span class="nc" id="L21">        return childAlertService.getChildAlert(address);</span>
+<span class="nc" id="L23">        log.info(&quot;GET method called for address: {}&quot;, address);</span>
+<span class="nc" id="L24">        return childAlertService.getChildAlert(address);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

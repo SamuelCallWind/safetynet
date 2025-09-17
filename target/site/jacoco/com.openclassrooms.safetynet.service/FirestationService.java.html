@@ -3,50 +3,62 @@
 import com.openclassrooms.safetynet.model.Firestation;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.repository.RootRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+<span class="fc" id="L12">@Slf4j</span>
 @Service
 public class FirestationService {
 
     @Autowired
     RootRepository rootRepository;
 
-<span class="fc" id="L17">    FirestationService() {}</span>
-<span class="fc" id="L18">    FirestationService(RootRepository rootRepository) {</span>
-<span class="fc" id="L19">        this.rootRepository = rootRepository;</span>
-<span class="fc" id="L20">    }</span>
+<span class="fc" id="L19">    FirestationService() {}</span>
+<span class="fc" id="L20">    FirestationService(RootRepository rootRepository) {</span>
+<span class="fc" id="L21">        this.rootRepository = rootRepository;</span>
+<span class="fc" id="L22">    }</span>
 
     public static int getFirestationNumberFromAddress(String address, RootRepository rootRepository) {
-<span class="fc" id="L23">        Firestation firestation = rootRepository.getRoot().getFirestations().stream()</span>
-<span class="fc" id="L24">                .filter(f -&gt; f.getAddress().equals(address))</span>
-<span class="fc" id="L25">                .findAny().orElse(null);</span>
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        return (firestation != null) ? firestation.getStation() : -1;</span>
+        try {
+<span class="fc" id="L26">            Firestation firestation = rootRepository.getRoot().getFirestations().stream()</span>
+<span class="fc" id="L27">                    .filter(f -&gt; f.getAddress().equals(address))</span>
+<span class="fc" id="L28">                    .findAny().orElse(null);</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">            return (firestation != null) ? firestation.getStation() : -1;</span>
+<span class="nc" id="L30">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L31">            log.error(&quot;Failed to get the Firestation number from address: {}&quot;, address, e);</span>
+        }
+<span class="nc" id="L33">        return -1;</span>
     }
 
     public static String getFirestationAddressFromNumber(Integer stationNumber, RootRepository rootRepository) {
-<span class="fc" id="L30">        Firestation firestation = rootRepository.getRoot().getFirestations().stream()</span>
-<span class="pc bpc" id="L31" title="1 of 2 branches missed.">                .filter(f -&gt; f.getStation() == stationNumber)</span>
-<span class="fc" id="L32">                .findAny().orElse(null);</span>
-<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        return (firestation != null) ? firestation.getAddress() : &quot;Not found&quot;;</span>
+        try {
+<span class="fc" id="L38">            Firestation firestation = rootRepository.getRoot().getFirestations().stream()</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">                    .filter(f -&gt; f.getStation() == stationNumber)</span>
+<span class="fc" id="L40">                    .findAny().orElse(null);</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">            return (firestation != null) ? firestation.getAddress() : &quot;Not found&quot;;</span>
+<span class="nc" id="L42">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L43">            log.error(&quot;Failed to get the Firestation address from number: {}&quot;, stationNumber, e);</span>
+        }
+<span class="nc" id="L45">        return &quot;Not found&quot;;</span>
     }
 
     public void addFirestation(Firestation firestation) {
-<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (rootRepository.getRoot().getFirestations().contains(firestation)) {</span>
-<span class="fc" id="L38">            throw new RuntimeException(&quot;The firestation is already inside the database&quot;);</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (rootRepository.getRoot().getFirestations().contains(firestation)) {</span>
+<span class="fc" id="L50">            throw new RuntimeException(&quot;The firestation is already inside the database&quot;);</span>
         } else {
-<span class="fc" id="L40">            rootRepository.addFirestation(firestation);</span>
+<span class="fc" id="L52">            rootRepository.addFirestation(firestation);</span>
         }
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L54">    }</span>
 
     public void removeFirestation(Firestation firestation) {
-<span class="fc" id="L45">        rootRepository.removeFirestation(firestation);</span>
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L57">        rootRepository.removeFirestation(firestation);</span>
+<span class="fc" id="L58">    }</span>
 
     public void modifyFirestation(Firestation firestation) {
-<span class="fc" id="L49">        rootRepository.modifyFirestation(firestation);</span>
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L61">        rootRepository.modifyFirestation(firestation);</span>
+<span class="fc" id="L62">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

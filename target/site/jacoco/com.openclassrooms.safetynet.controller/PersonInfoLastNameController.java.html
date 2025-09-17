@@ -2,20 +2,23 @@
 
 import com.openclassrooms.safetynet.dto.PersonInfoLastNameReponse;
 import com.openclassrooms.safetynet.service.PersonInfoLastNameService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+<span class="fc" id="L11">@Slf4j</span>
 @RestController
-<span class="fc" id="L11">public class PersonInfoLastNameController {</span>
+<span class="fc" id="L13">public class PersonInfoLastNameController {</span>
 
     @Autowired
     PersonInfoLastNameService personInfoLastNameService;
 
     @GetMapping(&quot;/personInfolastName&quot;)
     public PersonInfoLastNameReponse getPersonInfolastName(@RequestParam String lastName) {
-<span class="nc" id="L18">        return personInfoLastNameService.getPersonInfoLastName(lastName);</span>
+<span class="nc" id="L20">        log.info(&quot;GET method called with the last name: {}&quot;, lastName);</span>
+<span class="nc" id="L21">        return personInfoLastNameService.getPersonInfoLastName(lastName);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

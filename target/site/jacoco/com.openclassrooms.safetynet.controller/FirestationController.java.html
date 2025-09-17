@@ -6,13 +6,15 @@ import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.repository.RootRepository;
 import com.openclassrooms.safetynet.service.FirestationService;
 import com.openclassrooms.safetynet.service.PersonService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+<span class="fc" id="L15">@Slf4j</span>
 @RestController
-<span class="fc" id="L15">public class FirestationController {</span>
+<span class="fc" id="L17">public class FirestationController {</span>
 
     @Autowired
     PersonService personService;
@@ -21,22 +23,26 @@ import java.util.List;
 
     @GetMapping(&quot;/firestation&quot;)
     public List&lt;Person&gt; getFirestation(@RequestParam int stationNumber) {
-<span class="nc" id="L24">        return personService.getPersonsByFirestationNumber(stationNumber);</span>
+<span class="nc" id="L26">        log.info(&quot;GET method called for the station number: {}&quot;, stationNumber);</span>
+<span class="nc" id="L27">        return personService.getPersonsByFirestationNumber(stationNumber);</span>
     }
 
     @PostMapping(&quot;/firestation&quot;)
     public void addFirestation(@RequestBody Firestation firestation) {
-<span class="nc" id="L29">        firestationService.addFirestation(firestation);</span>
-<span class="nc" id="L30">    }</span>
+<span class="nc" id="L32">        log.info(&quot;POST method called for the firestation: {}&quot;, firestation);</span>
+<span class="nc" id="L33">        firestationService.addFirestation(firestation);</span>
+<span class="nc" id="L34">    }</span>
 
     @DeleteMapping(&quot;/firestation&quot;)
     public void removeFirestation(@RequestBody Firestation firestation) {
-<span class="nc" id="L34">        firestationService.removeFirestation(firestation);</span>
-<span class="nc" id="L35">    }</span>
+<span class="nc" id="L38">        log.info(&quot;DELETE method called for the firestation: {}&quot;, firestation);</span>
+<span class="nc" id="L39">        firestationService.removeFirestation(firestation);</span>
+<span class="nc" id="L40">    }</span>
 
     @PutMapping(&quot;/firestation&quot;)
     public void modifyFirestation(@RequestBody Firestation firestation) {
-<span class="nc" id="L39">        firestationService.modifyFirestation(firestation);</span>
-<span class="nc" id="L40">    }</span>
+<span class="nc" id="L44">        log.info(&quot;PUT method called for the firestation: {}&quot;, firestation);</span>
+<span class="nc" id="L45">        firestationService.modifyFirestation(firestation);</span>
+<span class="nc" id="L46">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

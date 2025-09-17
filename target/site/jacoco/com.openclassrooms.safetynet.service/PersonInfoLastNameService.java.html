@@ -4,38 +4,44 @@ import com.openclassrooms.safetynet.dto.PersonInfoLastNameDto;
 import com.openclassrooms.safetynet.dto.PersonInfoLastNameReponse;
 import com.openclassrooms.safetynet.repository.RootRepository;
 import com.openclassrooms.safetynet.util.DateUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+<span class="fc" id="L14">@Slf4j</span>
 @Service
 public class PersonInfoLastNameService {
 
     @Autowired
     RootRepository rootRepository;
 
-<span class="fc" id="L19">    public PersonInfoLastNameService() {}</span>
-<span class="fc" id="L20">    public PersonInfoLastNameService(RootRepository rootRepository) {</span>
-<span class="fc" id="L21">        this.rootRepository = rootRepository;</span>
-<span class="fc" id="L22">    }</span>
+<span class="fc" id="L21">    public PersonInfoLastNameService() {}</span>
+<span class="fc" id="L22">    public PersonInfoLastNameService(RootRepository rootRepository) {</span>
+<span class="fc" id="L23">        this.rootRepository = rootRepository;</span>
+<span class="fc" id="L24">    }</span>
 
     public PersonInfoLastNameReponse getPersonInfoLastName(String lastName) {
-<span class="fc" id="L25">        List&lt;PersonInfoLastNameDto&gt; result = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L26">        rootRepository.getRoot().getPersons().stream().filter(person -&gt; person.getLastName().equals(lastName))</span>
-<span class="fc" id="L27">                .forEach(person -&gt; {</span>
-<span class="fc" id="L28">                    result.add(new PersonInfoLastNameDto(person.getFirstName(),</span>
-<span class="fc" id="L29">                            person.getLastName(),</span>
-<span class="fc" id="L30">                            person.getAddress(),</span>
-<span class="fc" id="L31">                            DateUtils.calculateAge(MedicalRecordService.getBirthdateFromPersonsName(person.getFirstName(),</span>
-<span class="fc" id="L32">                                    person.getLastName(), rootRepository)),</span>
-<span class="fc" id="L33">                            person.getEmail(),</span>
-<span class="fc" id="L34">                            MedicalRecordService.getMedicationFromFullName(person.getFirstName(), person.getLastName(), rootRepository),</span>
-<span class="fc" id="L35">                            MedicalRecordService.getAllergiesFromFullName(person.getFirstName(), person.getLastName(), rootRepository)</span>
-                    ));
-<span class="fc" id="L37">                });</span>
-<span class="fc" id="L38">        return new PersonInfoLastNameReponse(result);</span>
+<span class="fc" id="L27">        List&lt;PersonInfoLastNameDto&gt; result = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="fc" id="L29">            rootRepository.getRoot().getPersons().stream().filter(person -&gt; person.getLastName().equals(lastName))</span>
+<span class="fc" id="L30">                    .forEach(person -&gt; {</span>
+<span class="fc" id="L31">                        result.add(new PersonInfoLastNameDto(person.getFirstName(),</span>
+<span class="fc" id="L32">                                person.getLastName(),</span>
+<span class="fc" id="L33">                                person.getAddress(),</span>
+<span class="fc" id="L34">                                DateUtils.calculateAge(MedicalRecordService.getBirthdateFromPersonsName(person.getFirstName(),</span>
+<span class="fc" id="L35">                                        person.getLastName(), rootRepository)),</span>
+<span class="fc" id="L36">                                person.getEmail(),</span>
+<span class="fc" id="L37">                                MedicalRecordService.getMedicationFromFullName(person.getFirstName(), person.getLastName(), rootRepository),</span>
+<span class="fc" id="L38">                                MedicalRecordService.getAllergiesFromFullName(person.getFirstName(), person.getLastName(), rootRepository)</span>
+                        ));
+<span class="fc" id="L40">                    });</span>
+<span class="nc" id="L41">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L42">            log.error(&quot;Failed to getPersonInfoLastName from name: {}&quot;, lastName, e);</span>
+<span class="fc" id="L43">        }</span>
+<span class="fc" id="L44">        return new PersonInfoLastNameReponse(result);</span>
     }
 
 

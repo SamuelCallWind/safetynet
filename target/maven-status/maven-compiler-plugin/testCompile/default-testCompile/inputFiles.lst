@@ -1,6 +1,5 @@
-C:\Users\Samuel\Documents\JAVA\safetynet\src\test\java\com\openclassrooms\safetynet\ChildAlertServiceTest.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\test\java\com\openclassrooms\safetynet\controller\PersonControllerTest.java
-C:\Users\Samuel\Documents\JAVA\safetynet\src\test\java\com\openclassrooms\safetynet\RootRepositoryTest.java
+C:\Users\Samuel\Documents\JAVA\safetynet\src\test\java\com\openclassrooms\safetynet\integration\RootRepositoryTest.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\test\java\com\openclassrooms\safetynet\SafetynetApplicationTests.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\test\java\com\openclassrooms\safetynet\service\ChildAlertServiceTest.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\test\java\com\openclassrooms\safetynet\service\FireServiceTest.java
@@ -9,3 +8,4 @@ C:\Users\Samuel\Documents\JAVA\safetynet\src\test\java\com\openclassrooms\safety
 C:\Users\Samuel\Documents\JAVA\safetynet\src\test\java\com\openclassrooms\safetynet\service\MedicalRecordServiceTest.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\test\java\com\openclassrooms\safetynet\service\PersonInfoLastNameServiceTest.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\test\java\com\openclassrooms\safetynet\service\PersonServiceTest.java
+C:\Users\Samuel\Documents\JAVA\safetynet\src\test\java\com\openclassrooms\safetynet\service\PhoneAlertServiceTest.java

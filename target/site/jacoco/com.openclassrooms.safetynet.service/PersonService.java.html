@@ -3,71 +3,81 @@
 import com.openclassrooms.safetynet.model.Medicalrecord;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.repository.RootRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+<span class="fc" id="L14">@Slf4j</span>
 @Service
 public class PersonService {
 
     @Autowired
     RootRepository rootRepository;
 
-<span class="fc" id="L18">    PersonService() {}</span>
-<span class="fc" id="L19">    PersonService(RootRepository rootRepository) {</span>
-<span class="fc" id="L20">        this.rootRepository = rootRepository;</span>
-<span class="fc" id="L21">    }</span>
+<span class="fc" id="L21">    PersonService() {}</span>
+<span class="fc" id="L22">    PersonService(RootRepository rootRepository) {</span>
+<span class="fc" id="L23">        this.rootRepository = rootRepository;</span>
+<span class="fc" id="L24">    }</span>
 
     public List&lt;Person&gt; getPersons() {
-<span class="fc" id="L24">        return new ArrayList&lt;&gt;(rootRepository.getRoot().getPersons());</span>
+<span class="fc" id="L27">        return new ArrayList&lt;&gt;(rootRepository.getRoot().getPersons());</span>
     }
 
     public List&lt;Person&gt; getPersonByLastName(String lastName) {
-<span class="fc" id="L28">        List&lt;Person&gt; result = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L29">        rootRepository.getRoot().getPersons().forEach(person -&gt; {</span>
-<span class="fc bfc" id="L30" title="All 2 branches covered.">            if (person.getLastName().equals(lastName)) {</span>
-<span class="fc" id="L31">                result.add(person);</span>
-            }
-<span class="fc" id="L33">        });</span>
-<span class="fc" id="L34">        return result;</span>
+<span class="fc" id="L31">        List&lt;Person&gt; result = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="fc" id="L33">            rootRepository.getRoot().getPersons().forEach(person -&gt; {</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">                if (person.getLastName().equals(lastName)) {</span>
+<span class="fc" id="L35">                    result.add(person);</span>
+                }
+<span class="fc" id="L37">            });</span>
+<span class="nc" id="L38">        } catch (Exception e) {</span>
+<span class="nc" id="L39">            log.error(&quot;Error while getting the person by last name: {}&quot;,lastName, e);</span>
+<span class="fc" id="L40">        }</span>
+<span class="fc" id="L41">        return result;</span>
     }
 
     public List&lt;Person&gt; getPersonsByFirestationNumber(int firestationNumber) {
-<span class="fc" id="L38">        return getPersonsByFirestationNumber(firestationNumber, rootRepository);</span>
+<span class="fc" id="L45">        return getPersonsByFirestationNumber(firestationNumber, rootRepository);</span>
     }
 
     public static List&lt;Person&gt; getPersonsByFirestationNumber(int firestationNumber, RootRepository rootRepository) {
-<span class="fc" id="L42">        List&lt;String&gt; addressOfFirestation = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L43">        List&lt;Person&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L49">        List&lt;String&gt; addressOfFirestation = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L50">        List&lt;Person&gt; result = new ArrayList&lt;&gt;();</span>
 
-        // First, I'm checking the address of the station number
-<span class="fc" id="L46">        rootRepository.getRoot().getFirestations().forEach(firestation -&gt; {</span>
-<span class="fc bfc" id="L47" title="All 2 branches covered.">            if (firestation.getStation() == firestationNumber) {</span>
-<span class="fc" id="L48">                addressOfFirestation.add(firestation.getAddress());</span>
-            }
-<span class="fc" id="L50">        });</span>
+        try {
+<span class="fc" id="L53">            rootRepository.getRoot().getFirestations().forEach(firestation -&gt; {</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">                if (firestation.getStation() == firestationNumber) {</span>
+<span class="fc" id="L55">                    addressOfFirestation.add(firestation.getAddress());</span>
+                }
+<span class="fc" id="L57">            });</span>
 
-<span class="fc" id="L52">        rootRepository.getRoot().getPersons().forEach(person -&gt; {</span>
-<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (addressOfFirestation.contains(person.getAddress())) {</span>
-<span class="fc" id="L54">                result.add(person);</span>
-            }
-<span class="fc" id="L56">        });</span>
-<span class="fc" id="L57">        return result;</span>
+<span class="fc" id="L59">            rootRepository.getRoot().getPersons().forEach(person -&gt; {</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">                if (addressOfFirestation.contains(person.getAddress())) {</span>
+<span class="fc" id="L61">                    result.add(person);</span>
+                }
+<span class="fc" id="L63">            });</span>
+<span class="nc" id="L64">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L65">            log.error(&quot;Error while getting the Firestation by the number: {}&quot;, firestationNumber, e);</span>
+<span class="fc" id="L66">        }</span>
+<span class="fc" id="L67">        return result;</span>
     }
 
     public void addPerson(Person person) {
-<span class="fc" id="L61">        rootRepository.addPerson(person);</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L71">        rootRepository.addPerson(person);</span>
+<span class="fc" id="L72">    }</span>
 
     public void removePerson(Person person) {
-<span class="fc" id="L65">        rootRepository.removePerson(person);</span>
-<span class="fc" id="L66">    }</span>
+<span class="fc" id="L75">        rootRepository.removePerson(person);</span>
+<span class="fc" id="L76">    }</span>
 
     public void modifyPerson(Person person) {
-<span class="fc" id="L69">        rootRepository.modifyPerson(person);</span>
-<span class="fc" id="L70">    }</span>
+<span class="fc" id="L79">        rootRepository.modifyPerson(person);</span>
+<span class="fc" id="L80">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

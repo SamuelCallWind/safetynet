@@ -5,50 +5,57 @@ import com.openclassrooms.safetynet.dto.PersonDto;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.repository.RootRepository;
 import com.openclassrooms.safetynet.service.PersonService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+<span class="fc" id="L16">@Slf4j</span>
 @RestController
-<span class="fc" id="L15">public class PersonController {</span>
+<span class="fc" id="L18">public class PersonController {</span>
 
     @Autowired
     PersonService personService;
 
     @GetMapping(&quot;/person&quot;)
     public List&lt;Person&gt; getPersonByLastName(@RequestParam String lastName) {
-<span class="fc" id="L22">        return personService.getPersonByLastName(lastName);</span>
+<span class="fc" id="L25">        log.info(&quot;GET method called with lastName={}&quot;, lastName);</span>
+<span class="fc" id="L26">        return personService.getPersonByLastName(lastName);</span>
     }
 
     @PostMapping(&quot;/person&quot;)
     public void addPerson(@RequestBody PersonDto personDto) {
-<span class="nc" id="L27">        personService.addPerson(new Person(personDto.getFirstName(),</span>
-<span class="nc" id="L28">                personDto.getLastName(),</span>
-<span class="nc" id="L29">                personDto.getAddress(),</span>
-<span class="nc" id="L30">                personDto.getCity(),</span>
-<span class="nc" id="L31">                personDto.getPhone(),</span>
-<span class="nc" id="L32">                personDto.getEmail(),</span>
-<span class="nc" id="L33">                personDto.getZip()</span>
+<span class="fc" id="L31">        log.info(&quot;POST method called with lastName={}&quot;, personDto.getLastName());</span>
+<span class="fc" id="L32">        personService.addPerson(new Person(personDto.getFirstName(),</span>
+<span class="fc" id="L33">                personDto.getLastName(),</span>
+<span class="fc" id="L34">                personDto.getAddress(),</span>
+<span class="fc" id="L35">                personDto.getCity(),</span>
+<span class="fc" id="L36">                personDto.getPhone(),</span>
+<span class="fc" id="L37">                personDto.getEmail(),</span>
+<span class="fc" id="L38">                personDto.getZip()</span>
         ));
-<span class="nc" id="L35">    }</span>
+<span class="fc" id="L40">    }</span>
 
     @DeleteMapping(&quot;/person&quot;)
     public void deletePerson(@RequestBody PersonDto personDto) {
-<span class="nc" id="L39">        personService.removePerson(new Person(personDto.getFirstName(),</span>
-<span class="nc" id="L40">                personDto.getLastName(),</span>
-<span class="nc" id="L41">                personDto.getAddress(),</span>
-<span class="nc" id="L42">                personDto.getCity(),</span>
-<span class="nc" id="L43">                personDto.getPhone(),</span>
-<span class="nc" id="L44">                personDto.getEmail(),</span>
-<span class="nc" id="L45">                personDto.getZip()</span>
+<span class="nc" id="L44">        log.info(&quot;DELETE method called with lastName={}&quot;, personDto.getLastName());</span>
+<span class="nc" id="L45">        personService.removePerson(new Person(personDto.getFirstName(),</span>
+<span class="nc" id="L46">                personDto.getLastName(),</span>
+<span class="nc" id="L47">                personDto.getAddress(),</span>
+<span class="nc" id="L48">                personDto.getCity(),</span>
+<span class="nc" id="L49">                personDto.getPhone(),</span>
+<span class="nc" id="L50">                personDto.getEmail(),</span>
+<span class="nc" id="L51">                personDto.getZip()</span>
         ));
-<span class="nc" id="L47">    }</span>
+<span class="nc" id="L53">    }</span>
 
     @PutMapping(&quot;/person&quot;)
     public void modifyPerson(@RequestBody Person person) {
-<span class="fc" id="L51">        personService.modifyPerson(person);</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L57">        log.info(&quot;PUT method called with lastName={}&quot;, person.getLastName());</span>
+<span class="fc" id="L58">        personService.modifyPerson(person);</span>
+<span class="fc" id="L59">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

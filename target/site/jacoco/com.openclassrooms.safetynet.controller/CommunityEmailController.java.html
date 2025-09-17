@@ -2,20 +2,23 @@
 
 import com.openclassrooms.safetynet.dto.CommunityEmailResponse;
 import com.openclassrooms.safetynet.service.CommunityEmailService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+<span class="fc" id="L11">@Slf4j</span>
 @RestController
-<span class="fc" id="L11">public class CommunityEmailController {</span>
+<span class="fc" id="L13">public class CommunityEmailController {</span>
 
     @Autowired
     CommunityEmailService communityEmailService;
 
     @GetMapping(&quot;/communityEmail&quot;)
     public CommunityEmailResponse getCommunityEmail(@RequestParam String city) {
-<span class="nc" id="L18">        return new CommunityEmailResponse(communityEmailService.getEmailsFromCity(city));</span>
+<span class="nc" id="L20">        log.info(&quot;GET method called for the city: {}&quot;, city);</span>
+<span class="nc" id="L21">        return new CommunityEmailResponse(communityEmailService.getEmailsFromCity(city));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

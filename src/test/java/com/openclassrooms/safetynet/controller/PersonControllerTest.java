@@ -1,5 +1,6 @@
 package com.openclassrooms.safetynet.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.openclassrooms.safetynet.controller.PersonController;
 import com.openclassrooms.safetynet.dto.PersonDto;
@@ -62,6 +63,18 @@ class PersonControllerTest {
                 .andExpect(status().isOk());
 
         verify(personService).modifyPerson(any(Person.class));
+    }
+
+    @Test
+    void addPerson_callsService() throws Exception {
+        Person jane = new Person("Jane", "Smith", "10 Downing St", "London", "555", "jane@mail.com", 12345);
+
+        mockMvc.perform(post("/person")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(jane)))
+                .andExpect(status().isOk());
+
+        verify(personService).addPerson(any(Person.class));
     }
 }
 
