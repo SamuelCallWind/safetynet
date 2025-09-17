@@ -70,8 +70,12 @@ public class RootRepository {
     }
 
     public void addPerson(Person person) {
-        root.getPersons().add(person);
-        save();
+        try {
+            root.getPersons().add(person);
+            save();
+        } catch (RuntimeException e) {
+            log.error("Error while adding the following person: {}", person);
+        }
     }
 
     private void save() {
@@ -79,7 +83,7 @@ public class RootRepository {
             mapper.writerWithDefaultPrettyPrinter()
                     .writeValue(new File(fullPath), root);
         } catch (Exception e) {
-            System.out.println("Failed to save the data: " + e.getMessage());
+            log.error("Failed to save the data: {}", e.getMessage());
         }
         reload();
     }
@@ -89,36 +93,48 @@ public class RootRepository {
     }
 
     public void removePerson(Person person) {
-        root.getPersons().remove(person);
-        save();
+        try {
+            root.getPersons().remove(person);
+            save();
+        } catch (RuntimeException e) {
+            log.error("Failed to remove the person: {}", person);
+        }
     }
 
     public void modifyPerson(Person dataToBeChanged) {
-        List<Person> persons = root.getPersons();
-        for (int i = 0; i < persons.size(); ++i) {
-            Person currentPerson = persons.get(i);
-            if (currentPerson.getFirstName().equals(dataToBeChanged.getFirstName()) && currentPerson.getLastName().equals(dataToBeChanged.getLastName())) {
-                currentPerson.setAddress(dataToBeChanged.getAddress());
-                currentPerson.setCity(dataToBeChanged.getCity());
-                currentPerson.setPhone(dataToBeChanged.getPhone());
-                currentPerson.setEmail(dataToBeChanged.getEmail());
-                currentPerson.setZip(dataToBeChanged.getZip());
-                break;
+        try {
+            List<Person> persons = root.getPersons();
+            for (int i = 0; i < persons.size(); ++i) {
+                Person currentPerson = persons.get(i);
+                if (currentPerson.getFirstName().equals(dataToBeChanged.getFirstName()) && currentPerson.getLastName().equals(dataToBeChanged.getLastName())) {
+                    currentPerson.setAddress(dataToBeChanged.getAddress());
+                    currentPerson.setCity(dataToBeChanged.getCity());
+                    currentPerson.setPhone(dataToBeChanged.getPhone());
+                    currentPerson.setEmail(dataToBeChanged.getEmail());
+                    currentPerson.setZip(dataToBeChanged.getZip());
+                    break;
+                }
             }
+            save();
+        } catch (RuntimeException e) {
+            log.error("Failed to modify the person: {}", dataToBeChanged);
         }
-        save();
     }
 
     public void addFirestation(Firestation firestation) {
-        root.getFirestations().add(firestation);
-        save();
+        try {
+            root.getFirestations().add(firestation);
+            save();
+        } catch (RuntimeException e) {
+            log.error("Failed to add the firestation: {}", firestation);
+        }
     }
 
     public void removeFirestation(Firestation firestation) {
         try {
             root.getFirestations().remove(firestation);
         } catch (Exception e) {
-            System.out.println("There was an error while trying to delete the firestation" + e.getMessage());
+            log.error("There was an error while trying to delete the firestation: {}", firestation, e);
         }
         save();
     }
@@ -131,34 +147,46 @@ public class RootRepository {
                     .ifPresent(station -> station.setStation(firestation.getStation()));
             save();
         } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+            log.error("Failed to modify the firestation: {}",firestation, e);
         }
     }
 
     public void addMedicalRecord(Medicalrecord medicalrecord) {
-        root.getMedicalrecords().add(medicalrecord);
-        save();
+        try {
+            root.getMedicalrecords().add(medicalrecord);
+            save();
+        } catch (RuntimeException e) {
+            log.error("Failed to add the medical record: {}", medicalrecord, e);
+        }
     }
 
     public void removeMedicalRecord(String firstName, String lastName) {
-        Medicalrecord recordToBeRemoved = root.getMedicalrecords().stream()
-                .filter(record -> record.getFirstName().equals(firstName) && record.getLastName().equals(lastName))
-                .findFirst()
-                .orElse(null);
-        root.getMedicalrecords().remove(recordToBeRemoved);
-        save();
+        try {
+            Medicalrecord recordToBeRemoved = root.getMedicalrecords().stream()
+                    .filter(record -> record.getFirstName().equals(firstName) && record.getLastName().equals(lastName))
+                    .findFirst()
+                    .orElse(null);
+            root.getMedicalrecords().remove(recordToBeRemoved);
+            save();
+        } catch (RuntimeException e) {
+            log.error("Failed to remove the medical record for {} {}", firstName, lastName, e);
+        }
     }
 
     public void modifyMedicalRecord(Medicalrecord medicalrecord) {
-        for (int i = 0; i < root.getMedicalrecords().size(); ++i) {
-            Medicalrecord currentRecord = root.getMedicalrecords().get(i);
-            if (currentRecord.getFirstName().equals(medicalrecord.getFirstName())
-                    && currentRecord.getLastName().equals(medicalrecord.getLastName())) {
+        try {
+            for (int i = 0; i < root.getMedicalrecords().size(); ++i) {
+                Medicalrecord currentRecord = root.getMedicalrecords().get(i);
+                if (currentRecord.getFirstName().equals(medicalrecord.getFirstName())
+                        && currentRecord.getLastName().equals(medicalrecord.getLastName())) {
                     currentRecord.setBirthdate(medicalrecord.getBirthdate());
                     currentRecord.setMedications(medicalrecord.getMedications());
                     currentRecord.setAllergies(medicalrecord.getAllergies());
+                }
             }
+            save();
+        } catch (RuntimeException e) {
+            log.error("Failed to modify the medical record: {}", medicalrecord, e);
         }
-        save();
     }
 }

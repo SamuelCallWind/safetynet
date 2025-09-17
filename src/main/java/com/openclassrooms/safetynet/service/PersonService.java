@@ -63,7 +63,6 @@ public class PersonService {
             });
         } catch (RuntimeException e) {
             log.error("Error while getting the Firestation by the number: {}", firestationNumber, e);
-            throw new RuntimeException(e);
         }
         return result;
     }
