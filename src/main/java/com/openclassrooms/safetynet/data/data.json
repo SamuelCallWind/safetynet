@@ -321,7 +321,7 @@
     "lastName" : "Kirkland",
     "birthdate" : "08/08/1998",
     "medications" : [ "Testmedicine 500mg", "anotherMedicine 10mg" ],
-    "allergies" : [ "Pollen" ]
+    "allergies" : [ ]
   } ],
   "firestations" : [ {
     "address" : "1509 Culver St",
