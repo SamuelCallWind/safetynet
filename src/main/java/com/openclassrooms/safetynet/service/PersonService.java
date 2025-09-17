@@ -3,12 +3,15 @@ package com.openclassrooms.safetynet.service;
 import com.openclassrooms.safetynet.model.Medicalrecord;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.repository.RootRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Service
 public class PersonService {
 
@@ -26,11 +29,15 @@ public class PersonService {
 
     public List<Person> getPersonByLastName(String lastName) {
         List<Person> result = new ArrayList<>();
-        rootRepository.getRoot().getPersons().forEach(person -> {
-            if (person.getLastName().equals(lastName)) {
-                result.add(person);
-            }
-        });
+        try {
+            rootRepository.getRoot().getPersons().forEach(person -> {
+                if (person.getLastName().equals(lastName)) {
+                    result.add(person);
+                }
+            });
+        } catch (Exception e) {
+            log.error("Error while getting the person by last name: {}",lastName, e);
+        }
         return result;
     }
 
@@ -42,18 +49,22 @@ public class PersonService {
         List<String> addressOfFirestation = new ArrayList<>();
         List<Person> result = new ArrayList<>();
 
-        // First, I'm checking the address of the station number
-        rootRepository.getRoot().getFirestations().forEach(firestation -> {
-            if (firestation.getStation() == firestationNumber) {
-                addressOfFirestation.add(firestation.getAddress());
-            }
-        });
+        try {
+            rootRepository.getRoot().getFirestations().forEach(firestation -> {
+                if (firestation.getStation() == firestationNumber) {
+                    addressOfFirestation.add(firestation.getAddress());
+                }
+            });
 
-        rootRepository.getRoot().getPersons().forEach(person -> {
-            if (addressOfFirestation.contains(person.getAddress())) {
-                result.add(person);
-            }
-        });
+            rootRepository.getRoot().getPersons().forEach(person -> {
+                if (addressOfFirestation.contains(person.getAddress())) {
+                    result.add(person);
+                }
+            });
+        } catch (RuntimeException e) {
+            log.error("Error while getting the Firestation by the number: {}", firestationNumber, e);
+            throw new RuntimeException(e);
+        }
         return result;
     }
 

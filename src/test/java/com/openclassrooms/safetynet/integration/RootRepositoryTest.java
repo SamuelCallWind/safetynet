@@ -1,4 +1,4 @@
-package com.openclassrooms.safetynet;
+package com.openclassrooms.safetynet.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.openclassrooms.safetynet.model.Firestation;
@@ -23,6 +23,7 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class RootRepositoryTest {
+
 
     RootRepository rootRepository;
     private Person newPerson;

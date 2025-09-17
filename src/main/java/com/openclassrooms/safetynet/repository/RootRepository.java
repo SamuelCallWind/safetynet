@@ -7,14 +7,19 @@ import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.model.Root;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Repository
 @Data
 public class RootRepository {
@@ -35,7 +40,7 @@ public class RootRepository {
             root = mapper.readValue(new File(fullPath), Root.class);
             return;
         } catch (Exception e) {
-            System.out.println("File data.json not found, reading from the original file in resources. \n");
+            log.error("File data.json not found, reading from the original file in resources.");
             try {
                 InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FILE_NAME);
                 if (inputStream == null) {
@@ -43,7 +48,7 @@ public class RootRepository {
                 }
                 root = mapper.readValue(inputStream, Root.class);
             } catch (IOException err) {
-                System.out.println("Error while reading the value from the data.json file: " + err);
+                log.error("Error while reading the value from the data.json file: ", err);
             }
         }
 
@@ -52,11 +57,15 @@ public class RootRepository {
 
     public List<Person> getPersonByName(String name) {
         List<Person> result = new ArrayList<>();
-        root.getPersons().forEach(person -> {
-            if (person.getLastName().equals(name)) {
-                result.add(person);
-            }
-        });
+        try {
+            root.getPersons().forEach(person -> {
+                if (person.getLastName().equals(name)) {
+                    result.add(person);
+                }
+            });
+        } catch (RuntimeException e) {
+            log.error("Error while getting the person by last name: {}", name, e);
+        }
         return result;
     }
 
