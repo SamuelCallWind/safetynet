@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,10 +59,8 @@ class FloodServiceTest {
                             FirestationService.getFirestationAddressFromNumber(1, rootRepository))
                     .thenReturn("123 Street");
 
-            // Run
             FloodResponse response = floodService.getFloodResponse(List.of(1));
 
-            // Verify
             assertNotNull(response);
             assertEquals(1, response.getStationDtos().size());
 

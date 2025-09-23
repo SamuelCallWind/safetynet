@@ -8,16 +8,16 @@ import com.openclassrooms.safetynet.model.Root;
 import jakarta.annotation.PostConstruct;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Repository
@@ -131,23 +131,25 @@ public class RootRepository {
     }
 
     public void removeFirestation(Firestation firestation) {
-        try {
-            root.getFirestations().remove(firestation);
-        } catch (Exception e) {
-            log.error("There was an error while trying to delete the firestation: {}", firestation, e);
+        boolean removed = root.getFirestations().remove(firestation);
+
+        if (!removed) {
+            log.error("There was an error while trying to delete the firestation: {} (Not found)", firestation);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         save();
     }
 
     public void modifyFirestation(Firestation firestation) {
-        try {
-            root.getFirestations().stream()
-                    .filter(station -> station.getAddress().equals(firestation.getAddress()))
-                    .findFirst()
-                    .ifPresent(station -> station.setStation(firestation.getStation()));
+        Optional<Firestation> result = root.getFirestations().stream()
+                .filter(station -> station.getAddress().equals(firestation.getAddress()))
+                .findFirst();
+        if (result.isPresent()) {
+            result.get().setStation(firestation.getStation());
             save();
-        } catch (RuntimeException e) {
-            log.error("Failed to modify the firestation: {}",firestation, e);
+        } else {
+            log.error("Failed to modify the firestation: {}",firestation);
+            throw new RuntimeException("Failed to modify the firestation: " + firestation + " (not found)");
         }
     }
 
@@ -161,15 +163,16 @@ public class RootRepository {
     }
 
     public void removeMedicalRecord(String firstName, String lastName) {
-        try {
-            Medicalrecord recordToBeRemoved = root.getMedicalrecords().stream()
-                    .filter(record -> record.getFirstName().equals(firstName) && record.getLastName().equals(lastName))
-                    .findFirst()
-                    .orElse(null);
+        Medicalrecord recordToBeRemoved = root.getMedicalrecords().stream()
+                .filter(record -> record.getFirstName().equals(firstName) && record.getLastName().equals(lastName))
+                .findFirst()
+                .orElse(null);
+        if (recordToBeRemoved == null) {
+            log.error("Unable to delete the medical record of: {} {}, as it is not found in the file", firstName, lastName);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Medical record not found for: " + firstName + " " + lastName);
+        } else {
             root.getMedicalrecords().remove(recordToBeRemoved);
             save();
-        } catch (RuntimeException e) {
-            log.error("Failed to remove the medical record for {} {}", firstName, lastName, e);
         }
     }
 
@@ -182,9 +185,11 @@ public class RootRepository {
                     currentRecord.setBirthdate(medicalrecord.getBirthdate());
                     currentRecord.setMedications(medicalrecord.getMedications());
                     currentRecord.setAllergies(medicalrecord.getAllergies());
+                    save();
+                    return;
                 }
             }
-            save();
+            throw new RuntimeException();
         } catch (RuntimeException e) {
             log.error("Failed to modify the medical record: {}", medicalrecord, e);
         }
