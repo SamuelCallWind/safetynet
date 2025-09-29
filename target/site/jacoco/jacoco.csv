@@ -5,12 +5,13 @@ safetynet,com.openclassrooms.safetynet.model,Medicalrecord,0,21,0,0,0,9,0,2,0,2
 safetynet,com.openclassrooms.safetynet.model,Firestation,0,12,0,0,0,5,0,2,0,2
 safetynet,com.openclassrooms.safetynet.repository,RootRepository,90,301,8,18,27,83,8,23,0,18
 safetynet,com.openclassrooms.safetynet.dto,FloodPersonDto,0,21,0,0,0,8,0,1,0,1
+safetynet,com.openclassrooms.safetynet.dto,FirestationPerson,0,15,0,0,0,6,0,1,0,1
 safetynet,com.openclassrooms.safetynet.dto,StationDto,0,9,0,0,0,4,0,1,0,1
 safetynet,com.openclassrooms.safetynet.dto,CommunityEmailResponse,6,0,0,0,3,0,1,0,1,0
 safetynet,com.openclassrooms.safetynet.dto,FloodResponse,0,6,0,0,0,3,0,1,0,1
 safetynet,com.openclassrooms.safetynet.dto,HouseholdMemberDto,0,9,0,0,0,4,0,1,0,1
 safetynet,com.openclassrooms.safetynet.dto,FireResponse,0,6,0,0,0,3,0,1,0,1
-safetynet,com.openclassrooms.safetynet.dto,FirestationResponse,12,0,0,0,5,0,1,0,1,0
+safetynet,com.openclassrooms.safetynet.dto,FirestationResponse,0,12,0,0,0,5,0,1,0,1
 safetynet,com.openclassrooms.safetynet.dto,ChildAlertResponse,0,9,0,0,0,4,0,1,0,1
 safetynet,com.openclassrooms.safetynet.dto,PersonInfoLastNameDto,0,24,0,0,0,9,0,1,0,1
 safetynet,com.openclassrooms.safetynet.dto,HouseholdDto,0,6,0,0,0,3,0,1,0,1
@@ -23,7 +24,7 @@ safetynet,com.openclassrooms.safetynet.service,FireService,0,113,2,6,0,25,2,7,0,
 safetynet,com.openclassrooms.safetynet.service,CommunityEmailService,17,3,0,0,3,1,2,1,2,1
 safetynet,com.openclassrooms.safetynet.service,PersonInfoLastNameService,6,77,0,0,2,19,0,6,0,6
 safetynet,com.openclassrooms.safetynet.service,MedicalRecordService,1,123,4,8,0,22,4,14,0,12
-safetynet,com.openclassrooms.safetynet.service,PersonService,13,111,0,6,4,32,0,16,0,13
+safetynet,com.openclassrooms.safetynet.service,PersonService,21,221,5,15,7,53,5,21,0,16
 safetynet,com.openclassrooms.safetynet.service,PhoneAlertService,12,53,1,1,3,14,1,6,0,6
 safetynet,com.openclassrooms.safetynet.service,FloodService,5,104,0,2,2,22,0,6,0,5
 safetynet,com.openclassrooms.safetynet.service,ChildAlertService,0,114,1,5,0,24,1,9,0,7

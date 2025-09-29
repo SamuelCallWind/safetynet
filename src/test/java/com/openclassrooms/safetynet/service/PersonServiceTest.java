@@ -1,6 +1,8 @@
 package com.openclassrooms.safetynet.service;
 
+import com.openclassrooms.safetynet.dto.FirestationResponse;
 import com.openclassrooms.safetynet.model.Firestation;
+import com.openclassrooms.safetynet.model.Medicalrecord;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.model.Root;
 import com.openclassrooms.safetynet.repository.RootRepository;
@@ -10,6 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -99,6 +103,20 @@ public class PersonServiceTest {
         List<Person> result = personService.getPersonsByFirestationNumber(99);
 
         assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void getFirestationResponse() {
+        Medicalrecord mr = new Medicalrecord("Jean", "Bodin", "08/08/1988", new ArrayList<>(), new ArrayList<>());
+        when(rootRepository.getRoot()).thenReturn(root);
+        when(root.getFirestations()).thenReturn(List.of(station1));
+        when(root.getPersons()).thenReturn(List.of(jean));
+        when(root.getMedicalrecords()).thenReturn(List.of(mr));
+
+        FirestationResponse response = personService.getFirestationResponse(1);
+
+        assertEquals("555-111-222", response.getListPersons().get(0).getPhone());
+        assertEquals(1, response.getNumberOfAdults());
     }
 
     @Test

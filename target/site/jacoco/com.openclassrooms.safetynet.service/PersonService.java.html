@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PersonService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">safetynet</a> &gt; <a href="index.source.html" class="el_package">com.openclassrooms.safetynet.service</a> &gt; <span class="el_source">PersonService.java</span></div><h1>PersonService.java</h1><pre class="source lang-java linenums">package com.openclassrooms.safetynet.service;
 
+import com.openclassrooms.safetynet.dto.FirestationPerson;
+import com.openclassrooms.safetynet.dto.FirestationResponse;
 import com.openclassrooms.safetynet.model.Medicalrecord;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.repository.RootRepository;
+import com.openclassrooms.safetynet.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,73 +14,110 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-<span class="fc" id="L14">@Slf4j</span>
+<span class="fc" id="L17">@Slf4j</span>
 @Service
 public class PersonService {
 
     @Autowired
     RootRepository rootRepository;
 
-<span class="fc" id="L21">    PersonService() {}</span>
-<span class="fc" id="L22">    PersonService(RootRepository rootRepository) {</span>
-<span class="fc" id="L23">        this.rootRepository = rootRepository;</span>
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L24">    PersonService() {}</span>
+<span class="fc" id="L25">    PersonService(RootRepository rootRepository) {</span>
+<span class="fc" id="L26">        this.rootRepository = rootRepository;</span>
+<span class="fc" id="L27">    }</span>
 
     public List&lt;Person&gt; getPersons() {
-<span class="fc" id="L27">        return new ArrayList&lt;&gt;(rootRepository.getRoot().getPersons());</span>
+<span class="fc" id="L30">        return new ArrayList&lt;&gt;(rootRepository.getRoot().getPersons());</span>
     }
 
     public List&lt;Person&gt; getPersonByLastName(String lastName) {
-<span class="fc" id="L31">        List&lt;Person&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L34">        List&lt;Person&gt; result = new ArrayList&lt;&gt;();</span>
         try {
-<span class="fc" id="L33">            rootRepository.getRoot().getPersons().forEach(person -&gt; {</span>
-<span class="fc bfc" id="L34" title="All 2 branches covered.">                if (person.getLastName().equals(lastName)) {</span>
-<span class="fc" id="L35">                    result.add(person);</span>
+<span class="fc" id="L36">            rootRepository.getRoot().getPersons().forEach(person -&gt; {</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">                if (person.getLastName().equals(lastName)) {</span>
+<span class="fc" id="L38">                    result.add(person);</span>
                 }
-<span class="fc" id="L37">            });</span>
-<span class="nc" id="L38">        } catch (Exception e) {</span>
-<span class="nc" id="L39">            log.error(&quot;Error while getting the person by last name: {}&quot;,lastName, e);</span>
-<span class="fc" id="L40">        }</span>
-<span class="fc" id="L41">        return result;</span>
+<span class="fc" id="L40">            });</span>
+<span class="nc" id="L41">        } catch (Exception e) {</span>
+<span class="nc" id="L42">            log.error(&quot;Error while getting the person by last name: {}&quot;,lastName, e);</span>
+<span class="fc" id="L43">        }</span>
+<span class="fc" id="L44">        return result;</span>
     }
 
     public List&lt;Person&gt; getPersonsByFirestationNumber(int firestationNumber) {
-<span class="fc" id="L45">        return getPersonsByFirestationNumber(firestationNumber, rootRepository);</span>
+<span class="fc" id="L48">        return getPersonsByFirestationNumber(firestationNumber, rootRepository);</span>
     }
 
     public static List&lt;Person&gt; getPersonsByFirestationNumber(int firestationNumber, RootRepository rootRepository) {
-<span class="fc" id="L49">        List&lt;String&gt; addressOfFirestation = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L50">        List&lt;Person&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L52">        List&lt;String&gt; addressOfFirestation = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L53">        List&lt;Person&gt; result = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="fc" id="L55">            rootRepository.getRoot().getFirestations().forEach(firestation -&gt; {</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">                if (firestation.getStation() == firestationNumber) {</span>
+<span class="fc" id="L57">                    addressOfFirestation.add(firestation.getAddress());</span>
+                }
+<span class="fc" id="L59">            });</span>
+
+<span class="fc" id="L61">            rootRepository.getRoot().getPersons().forEach(person -&gt; {</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">                if (addressOfFirestation.contains(person.getAddress())) {</span>
+<span class="fc" id="L63">                    result.add(person);</span>
+                }
+<span class="fc" id="L65">            });</span>
+<span class="nc" id="L66">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L67">            log.error(&quot;Error while getting the Firestation by the number: {}&quot;, firestationNumber, e);</span>
+<span class="fc" id="L68">        }</span>
+<span class="fc" id="L69">        return result;</span>
+    }
+
+    public FirestationResponse getFirestationResponse(int firestationNumber) {
+<span class="fc" id="L73">        List&lt;String&gt; addressOfFirestation = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L74">        List&lt;FirestationPerson&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L75">        int numberOfAdult = 0;</span>
+<span class="fc" id="L76">        int numberOfChildren = 0;</span>
 
         try {
-<span class="fc" id="L53">            rootRepository.getRoot().getFirestations().forEach(firestation -&gt; {</span>
-<span class="fc bfc" id="L54" title="All 2 branches covered.">                if (firestation.getStation() == firestationNumber) {</span>
-<span class="fc" id="L55">                    addressOfFirestation.add(firestation.getAddress());</span>
+<span class="fc" id="L79">            rootRepository.getRoot().getFirestations().forEach(firestation -&gt; {</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">                if (firestation.getStation() == firestationNumber) {</span>
+<span class="fc" id="L81">                    addressOfFirestation.add(firestation.getAddress());</span>
                 }
-<span class="fc" id="L57">            });</span>
+<span class="fc" id="L83">            });</span>
 
-<span class="fc" id="L59">            rootRepository.getRoot().getPersons().forEach(person -&gt; {</span>
-<span class="fc bfc" id="L60" title="All 2 branches covered.">                if (addressOfFirestation.contains(person.getAddress())) {</span>
-<span class="fc" id="L61">                    result.add(person);</span>
+<span class="fc" id="L85">            rootRepository.getRoot().getPersons().forEach(person -&gt; {</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">                if (addressOfFirestation.contains(person.getAddress())) {</span>
+<span class="fc" id="L87">                    result.add(new FirestationPerson(person.getFirstName(), person.getLastName(), person.getAddress(), person.getPhone()));</span>
                 }
-<span class="fc" id="L63">            });</span>
-<span class="nc" id="L64">        } catch (RuntimeException e) {</span>
-<span class="nc" id="L65">            log.error(&quot;Error while getting the Firestation by the number: {}&quot;, firestationNumber, e);</span>
-<span class="fc" id="L66">        }</span>
-<span class="fc" id="L67">        return result;</span>
+<span class="fc" id="L89">            });</span>
+
+            // Logic to check if the person is a child or an adult for the response
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            for (Medicalrecord medicalrecord : rootRepository.getRoot().getMedicalrecords()) {</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">                for (FirestationPerson person : result) {</span>
+<span class="pc bpc" id="L94" title="2 of 4 branches missed.">                    if (medicalrecord.getFirstName().equals(person.getFirstName()) &amp;&amp; medicalrecord.getLastName().equals(person.getLastName())) {</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">                        if (DateUtils.calculateAge(medicalrecord.getBirthdate()) &gt; 18) {</span>
+<span class="fc" id="L96">                            numberOfAdult++;</span>
+                        } else {
+<span class="nc" id="L98">                            numberOfChildren++;</span>
+                        }
+                    }
+<span class="fc" id="L101">                }</span>
+<span class="fc" id="L102">            }</span>
+
+<span class="nc" id="L104">        } catch (RuntimeException e) {</span>
+<span class="nc" id="L105">            log.error(&quot;Error while getting the Firestation by the number: {}&quot;, firestationNumber, e);</span>
+<span class="fc" id="L106">        }</span>
+<span class="fc" id="L107">        return new FirestationResponse(result, numberOfAdult, numberOfChildren);</span>
     }
 
     public void addPerson(Person person) {
-<span class="fc" id="L71">        rootRepository.addPerson(person);</span>
-<span class="fc" id="L72">    }</span>
+<span class="fc" id="L111">        rootRepository.addPerson(person);</span>
+<span class="fc" id="L112">    }</span>
 
     public void removePerson(Person person) {
-<span class="fc" id="L75">        rootRepository.removePerson(person);</span>
-<span class="fc" id="L76">    }</span>
+<span class="fc" id="L115">        rootRepository.removePerson(person);</span>
+<span class="fc" id="L116">    }</span>
 
     public void modifyPerson(Person person) {
-<span class="fc" id="L79">        rootRepository.modifyPerson(person);</span>
-<span class="fc" id="L80">    }</span>
+<span class="fc" id="L119">        rootRepository.modifyPerson(person);</span>
+<span class="fc" id="L120">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
