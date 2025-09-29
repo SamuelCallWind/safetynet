@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
     @Autowired
     PersonInfoLastNameService personInfoLastNameService;
 
-    @GetMapping(&quot;/personInfolastName&quot;)
+    @GetMapping(&quot;/personInfo&quot;)
     public PersonInfoLastNameReponse getPersonInfolastName(@RequestParam String lastName) {
 <span class="nc" id="L20">        log.info(&quot;GET method called with the last name: {}&quot;, lastName);</span>
 <span class="nc" id="L21">        return personInfoLastNameService.getPersonInfoLastName(lastName);</span>

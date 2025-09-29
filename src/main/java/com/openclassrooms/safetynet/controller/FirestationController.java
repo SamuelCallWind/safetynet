@@ -1,6 +1,7 @@
 package com.openclassrooms.safetynet.controller;
 
 
+import com.openclassrooms.safetynet.dto.FirestationResponse;
 import com.openclassrooms.safetynet.model.Firestation;
 import com.openclassrooms.safetynet.model.Person;
 import com.openclassrooms.safetynet.repository.RootRepository;
@@ -22,9 +23,9 @@ public class FirestationController {
     FirestationService firestationService;
 
     @GetMapping("/firestation")
-    public List<Person> getFirestation(@RequestParam int stationNumber) {
+    public FirestationResponse getFirestation(@RequestParam int stationNumber) {
         log.info("GET method called for the station number: {}", stationNumber);
-        return personService.getPersonsByFirestationNumber(stationNumber);
+        return personService.getFirestationResponse(stationNumber);
     }
 
     @PostMapping("/firestation")

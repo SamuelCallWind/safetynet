@@ -3,28 +3,33 @@
 import com.openclassrooms.safetynet.dto.NameDto;
 import com.openclassrooms.safetynet.model.Medicalrecord;
 import com.openclassrooms.safetynet.service.MedicalRecordService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+<span class="fc" id="L10">@Slf4j</span>
 @RestController
-<span class="fc" id="L10">public class MedicalRecordController {</span>
+<span class="fc" id="L12">public class MedicalRecordController {</span>
 
     @Autowired
     MedicalRecordService medicalRecordService;
 
     @PostMapping(&quot;/medicalRecord&quot;)
     public void addMedicalRecord(@RequestBody Medicalrecord medicalrecord) {
-<span class="nc" id="L17">        medicalRecordService.addMedicalRecord(medicalrecord);</span>
-<span class="nc" id="L18">    }</span>
+<span class="nc" id="L19">        log.info(&quot;POST method received for the medical record: {}&quot;, medicalrecord);</span>
+<span class="nc" id="L20">        medicalRecordService.addMedicalRecord(medicalrecord);</span>
+<span class="nc" id="L21">    }</span>
 
     @DeleteMapping(&quot;/medicalRecord&quot;)
     public void deleteMedicalRecord(@RequestBody NameDto dto) {
-<span class="nc" id="L22">        medicalRecordService.removeMedicalRecord(dto.getFirstName(), dto.getLastName());</span>
-<span class="nc" id="L23">    }</span>
+<span class="nc" id="L25">        log.info(&quot;DELETE method received for the person: {}&quot;, dto);</span>
+<span class="nc" id="L26">        medicalRecordService.removeMedicalRecord(dto.getFirstName(), dto.getLastName());</span>
+<span class="nc" id="L27">    }</span>
 
     @PutMapping(&quot;/medicalRecord&quot;)
     public void modifyMedicalRecord(@RequestBody Medicalrecord medicalrecord) {
-<span class="nc" id="L27">        medicalRecordService.modifyMedicalRecord(medicalrecord);</span>
-<span class="nc" id="L28">    }</span>
+<span class="nc" id="L31">        log.info(&quot;PUT method received for the medical record: {}&quot;, medicalrecord);</span>
+<span class="nc" id="L32">        medicalRecordService.modifyMedicalRecord(medicalrecord);</span>
+<span class="nc" id="L33">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

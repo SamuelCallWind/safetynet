@@ -1,175 +1,39 @@
-2025-09-23T09:18:09.244+02:00  INFO 17580 --- [safetynet] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-09-23T09:18:09.491+02:00  INFO 17580 --- [safetynet] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-09-23T09:18:13.219+02:00  INFO 24412 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Starting SafetynetApplication using Java 17.0.15 with PID 24412 (C:\Users\Samuel\Documents\JAVA\safetynet\target\classes started by Samuel in C:\Users\Samuel\Documents\JAVA\safetynet)
-2025-09-23T09:18:13.224+02:00 DEBUG 24412 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Running with Spring Boot v3.5.5, Spring v6.2.10
-2025-09-23T09:18:13.224+02:00  INFO 24412 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : No active profile set, falling back to 1 default profile: "default"
-2025-09-23T09:18:14.182+02:00  INFO 24412 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-09-23T09:18:14.195+02:00  INFO 24412 --- [safetynet] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-09-23T09:18:14.195+02:00  INFO 24412 --- [safetynet] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
-2025-09-23T09:18:14.276+02:00  INFO 24412 --- [safetynet] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-09-23T09:18:14.276+02:00  INFO 24412 --- [safetynet] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1004 ms
-2025-09-23T09:18:14.731+02:00  WARN 24412 --- [safetynet] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-23T09:18:14.826+02:00  INFO 24412 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-09-23T09:18:14.836+02:00  INFO 24412 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Started SafetynetApplication in 2.079 seconds (process running for 2.365)
-2025-09-23T09:18:21.402+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-09-23T09:18:21.403+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-09-23T09:18:21.403+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2025-09-23T09:18:21.454+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-2] c.o.s.c.MedicalRecordController          : POST method received for the medical record: Medicalrecord(firstName=Bob, lastName=Kirkland, birthdate=08/08/1998, medications=[Testmedicine 500mg, anotherMedicine 10mg], allergies=[])
-2025-09-23T09:18:29.632+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-3] c.o.s.c.MedicalRecordController          : DELETE method received for the person: NameDto(firstName=Bob, lastName=Kirkland)
-2025-09-23T09:18:32.213+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-4] c.o.s.c.MedicalRecordController          : DELETE method received for the person: NameDto(firstName=Bob, lastName=Kirkland)
-2025-09-23T09:18:32.213+02:00 ERROR 24412 --- [safetynet] [http-nio-8080-exec-4] c.o.safetynet.repository.RootRepository  : Unable to delete the medical record of: Bob Kirkland, as it is not found in the file
-2025-09-23T09:19:07.093+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-5] c.o.s.c.MedicalRecordController          : POST method received for the medical record: Medicalrecord(firstName=Bob, lastName=Kirkland, birthdate=08/08/1998, medications=[Testmedicine 500mg, anotherMedicine 10mg], allergies=[])
-2025-09-23T09:19:11.206+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-6] c.o.s.c.MedicalRecordController          : POST method received for the medical record: Medicalrecord(firstName=Bofzb, lastName=Kirfzkland, birthdate=08/08/1998, medications=[Testmedicine 500mg, anotherMedicine 10mg], allergies=[])
-2025-09-23T09:19:15.197+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-8] c.o.s.c.MedicalRecordController          : POST method received for the medical record: Medicalrecord(firstName=Bob, lastName=Kirkland, birthdate=08/08/1998, medications=[Testmedicine 500mg, anotherMedicine 10mg], allergies=[])
-2025-09-23T09:19:19.269+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-7] c.o.s.c.MedicalRecordController          : DELETE method received for the person: NameDto(firstName=Bob, lastName=Kirkland)
-2025-09-23T09:19:23.703+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-9] c.o.s.c.MedicalRecordController          : DELETE method received for the person: NameDto(firstName=Bob, lastName=Kirkland)
-2025-09-23T09:19:25.263+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-10] c.o.s.c.MedicalRecordController          : DELETE method received for the person: NameDto(firstName=Bob, lastName=Kirkland)
-2025-09-23T09:19:25.263+02:00 ERROR 24412 --- [safetynet] [http-nio-8080-exec-10] c.o.safetynet.repository.RootRepository  : Unable to delete the medical record of: Bob Kirkland, as it is not found in the file
-2025-09-23T09:19:49.604+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-1] c.o.s.c.MedicalRecordController          : DELETE method received for the person: NameDto(firstName=Bofzb, lastName=Kirfzkland)
-2025-09-23T09:35:49.850+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-4] c.o.s.controller.FirestationController   : GET method called for the station number: 1
-2025-09-23T09:37:54.679+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-8] c.o.s.controller.ChildAlertController    : GET method called for address: 947 E. Rose Dr
-2025-09-23T09:39:12.832+02:00  INFO 24412 --- [safetynet] [http-nio-8080-exec-10] c.o.safetynet.controller.FireController  : GET method called for the address: 947 E. Rose Dr
-2025-09-23T09:50:30.394+02:00  INFO 24412 --- [safetynet] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-09-23T09:50:30.623+02:00  INFO 24412 --- [safetynet] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-09-23T10:34:32.811+02:00  INFO 22040 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Starting SafetynetApplication using Java 17.0.15 with PID 22040 (C:\Users\Samuel\Documents\JAVA\safetynet\target\classes started by Samuel in C:\Users\Samuel\Documents\JAVA\safetynet)
-2025-09-23T10:34:32.811+02:00 DEBUG 22040 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Running with Spring Boot v3.5.5, Spring v6.2.10
-2025-09-23T10:34:32.813+02:00  INFO 22040 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : No active profile set, falling back to 1 default profile: "default"
-2025-09-23T10:34:33.766+02:00  INFO 22040 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-09-23T10:34:33.784+02:00  INFO 22040 --- [safetynet] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-09-23T10:34:33.784+02:00  INFO 22040 --- [safetynet] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
-2025-09-23T10:34:33.842+02:00  INFO 22040 --- [safetynet] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-09-23T10:34:33.842+02:00  INFO 22040 --- [safetynet] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 986 ms
-2025-09-23T10:34:34.290+02:00  WARN 22040 --- [safetynet] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-23T10:34:34.389+02:00  INFO 22040 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-09-23T10:34:34.400+02:00  INFO 22040 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Started SafetynetApplication in 2.069 seconds (process running for 2.364)
-2025-09-23T10:34:38.110+02:00  INFO 22040 --- [safetynet] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-09-23T10:34:38.110+02:00  INFO 22040 --- [safetynet] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-09-23T10:34:38.110+02:00  INFO 22040 --- [safetynet] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2025-09-23T10:35:12.813+02:00  INFO 22040 --- [safetynet] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-09-23T10:35:13.097+02:00  INFO 22040 --- [safetynet] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-09-23T10:37:46.089+02:00  INFO 10376 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Starting SafetynetApplication using Java 17.0.15 with PID 10376 (C:\Users\Samuel\Documents\JAVA\safetynet\target\classes started by Samuel in C:\Users\Samuel\Documents\JAVA\safetynet)
-2025-09-23T10:37:46.091+02:00 DEBUG 10376 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Running with Spring Boot v3.5.5, Spring v6.2.10
-2025-09-23T10:37:46.092+02:00  INFO 10376 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : No active profile set, falling back to 1 default profile: "default"
-2025-09-23T10:37:47.047+02:00  INFO 10376 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-09-23T10:37:47.059+02:00  INFO 10376 --- [safetynet] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-09-23T10:37:47.061+02:00  INFO 10376 --- [safetynet] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
-2025-09-23T10:37:47.110+02:00  INFO 10376 --- [safetynet] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-09-23T10:37:47.110+02:00  INFO 10376 --- [safetynet] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 974 ms
-2025-09-23T10:37:47.565+02:00  WARN 10376 --- [safetynet] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-23T10:37:47.652+02:00  INFO 10376 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-09-23T10:37:47.662+02:00  INFO 10376 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Started SafetynetApplication in 2.031 seconds (process running for 2.314)
-2025-09-23T10:38:04.463+02:00  INFO 10376 --- [safetynet] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-09-23T10:38:04.464+02:00  INFO 10376 --- [safetynet] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-09-23T10:38:04.465+02:00  INFO 10376 --- [safetynet] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-09-23T10:38:04.543+02:00  INFO 10376 --- [safetynet] [http-nio-8080-exec-2] c.o.s.c.CommunityEmailController         : GET method called for the city: Culver
-2025-09-23T10:49:22.956+02:00  INFO 10376 --- [safetynet] [http-nio-8080-exec-10] c.o.s.controller.FirestationController   : DELETE method called for the firestation: Firestation(address=123 sesame street, station=10)
-2025-09-23T10:49:24.331+02:00  INFO 10376 --- [safetynet] [http-nio-8080-exec-3] c.o.s.controller.FirestationController   : DELETE method called for the firestation: Firestation(address=123 sesame street, station=10)
-2025-09-23T10:49:25.156+02:00  INFO 10376 --- [safetynet] [http-nio-8080-exec-8] c.o.s.controller.FirestationController   : DELETE method called for the firestation: Firestation(address=123 sesame street, station=10)
-2025-09-23T10:49:25.981+02:00  INFO 10376 --- [safetynet] [http-nio-8080-exec-7] c.o.s.controller.FirestationController   : DELETE method called for the firestation: Firestation(address=123 sesame street, station=10)
-2025-09-23T10:49:26.705+02:00  INFO 10376 --- [safetynet] [http-nio-8080-exec-9] c.o.s.controller.FirestationController   : DELETE method called for the firestation: Firestation(address=123 sesame street, station=10)
-2025-09-23T10:49:27.418+02:00  INFO 10376 --- [safetynet] [http-nio-8080-exec-5] c.o.s.controller.FirestationController   : DELETE method called for the firestation: Firestation(address=123 sesame street, station=10)
-2025-09-23T10:49:28.138+02:00  INFO 10376 --- [safetynet] [http-nio-8080-exec-1] c.o.s.controller.FirestationController   : DELETE method called for the firestation: Firestation(address=123 sesame street, station=10)
-2025-09-23T10:53:04.193+02:00  INFO 10376 --- [safetynet] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-09-23T10:53:04.420+02:00  INFO 10376 --- [safetynet] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-09-23T10:53:08.259+02:00  INFO 35520 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Starting SafetynetApplication using Java 17.0.15 with PID 35520 (C:\Users\Samuel\Documents\JAVA\safetynet\target\classes started by Samuel in C:\Users\Samuel\Documents\JAVA\safetynet)
-2025-09-23T10:53:08.268+02:00 DEBUG 35520 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Running with Spring Boot v3.5.5, Spring v6.2.10
-2025-09-23T10:53:08.270+02:00  INFO 35520 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : No active profile set, falling back to 1 default profile: "default"
-2025-09-23T10:53:09.299+02:00  INFO 35520 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-09-23T10:53:09.313+02:00  INFO 35520 --- [safetynet] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-09-23T10:53:09.313+02:00  INFO 35520 --- [safetynet] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
-2025-09-23T10:53:09.356+02:00  INFO 35520 --- [safetynet] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-09-23T10:53:09.356+02:00  INFO 35520 --- [safetynet] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1050 ms
-2025-09-23T10:53:09.895+02:00  WARN 35520 --- [safetynet] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-23T10:53:10.002+02:00  INFO 35520 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-09-23T10:53:10.006+02:00  INFO 35520 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Started SafetynetApplication in 2.222 seconds (process running for 2.51)
-2025-09-23T10:53:12.029+02:00  INFO 35520 --- [safetynet] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-09-23T10:53:12.029+02:00  INFO 35520 --- [safetynet] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-09-23T10:53:12.029+02:00  INFO 35520 --- [safetynet] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2025-09-23T10:53:12.076+02:00  INFO 35520 --- [safetynet] [http-nio-8080-exec-2] c.o.s.controller.FirestationController   : DELETE method called for the firestation: Firestation(address=123 sesame street, station=10)
-2025-09-23T10:53:12.084+02:00 ERROR 35520 --- [safetynet] [http-nio-8080-exec-2] c.o.safetynet.repository.RootRepository  : There was an error while trying to delete the firestation: Firestation(address=123 sesame street, station=10) (Not found)
-2025-09-23T15:18:40.148+02:00  INFO 35520 --- [safetynet] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-09-23T15:18:40.369+02:00  INFO 35520 --- [safetynet] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-09-23T15:18:50.115+02:00  INFO 660 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Starting SafetynetApplication using Java 17.0.15 with PID 660 (C:\Users\Samuel\Documents\JAVA\safetynet\target\classes started by Samuel in C:\Users\Samuel\Documents\JAVA\safetynet)
-2025-09-23T15:18:50.117+02:00 DEBUG 660 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Running with Spring Boot v3.5.5, Spring v6.2.10
-2025-09-23T15:18:50.118+02:00  INFO 660 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : No active profile set, falling back to 1 default profile: "default"
-2025-09-23T15:18:51.155+02:00  INFO 660 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-09-23T15:18:51.167+02:00  INFO 660 --- [safetynet] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-09-23T15:18:51.168+02:00  INFO 660 --- [safetynet] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
-2025-09-23T15:18:51.214+02:00  INFO 660 --- [safetynet] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-09-23T15:18:51.214+02:00  INFO 660 --- [safetynet] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1056 ms
-2025-09-23T15:18:51.663+02:00  WARN 660 --- [safetynet] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2025-09-23T15:18:51.760+02:00  INFO 660 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-09-23T15:18:51.767+02:00  INFO 660 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Started SafetynetApplication in 2.098 seconds (process running for 3.55)
-2025-09-23T15:18:58.562+02:00  INFO 660 --- [safetynet] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-09-23T15:18:58.562+02:00  INFO 660 --- [safetynet] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-09-23T15:18:58.563+02:00  INFO 660 --- [safetynet] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-09-23T15:18:58.610+02:00  INFO 660 --- [safetynet] [http-nio-8080-exec-1] c.o.s.controller.FirestationController   : PUT method called for the firestation: Firestation(address=123 sesame street, station=10)
-2025-09-23T15:18:58.613+02:00 ERROR 660 --- [safetynet] [http-nio-8080-exec-1] c.o.safetynet.repository.RootRepository  : Failed to modify the firestation: Firestation(address=123 sesame street, station=10)
-2025-09-23T15:18:58.619+02:00 ERROR 660 --- [safetynet] [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Failed to modify the firestation: Firestation(address=123 sesame street, station=10) (not found)] with root cause
-
-java.lang.RuntimeException: Failed to modify the firestation: Firestation(address=123 sesame street, station=10) (not found)
-	at com.openclassrooms.safetynet.repository.RootRepository.modifyFirestation(RootRepository.java:152) ~[classes/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360) ~[spring-aop-6.2.10.jar:6.2.10]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.2.10.jar:6.2.10]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.2.10.jar:6.2.10]
-	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138) ~[spring-tx-6.2.10.jar:6.2.10]
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.10.jar:6.2.10]
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728) ~[spring-aop-6.2.10.jar:6.2.10]
-	at com.openclassrooms.safetynet.repository.RootRepository$$SpringCGLIB$$0.modifyFirestation(<generated>) ~[classes/:na]
-	at com.openclassrooms.safetynet.service.FirestationService.modifyFirestation(FirestationService.java:61) ~[classes/:na]
-	at com.openclassrooms.safetynet.controller.FirestationController.modifyFirestation(FirestationController.java:45) ~[classes/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.10.jar:6.2.10]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.10.jar:6.2.10]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.10.jar:6.2.10]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.10.jar:6.2.10]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.10.jar:6.2.10]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.10.jar:6.2.10]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.10.jar:6.2.10]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.10.jar:6.2.10]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.10.jar:6.2.10]
-	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:925) ~[spring-webmvc-6.2.10.jar:6.2.10]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:593) ~[tomcat-embed-core-10.1.44.jar:6.0]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.10.jar:6.2.10]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.44.jar:6.0]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.44.jar:10.1.44]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.10.jar:6.2.10]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.10.jar:6.2.10]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.10.jar:6.2.10]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.10.jar:6.2.10]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.10.jar:6.2.10]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.10.jar:6.2.10]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.44.jar:10.1.44]
-	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
-
+2025-09-29T08:37:09.774+02:00  INFO 32304 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Starting SafetynetApplication using Java 17.0.15 with PID 32304 (C:\Users\Samuel\Documents\JAVA\safetynet\target\classes started by Samuel in C:\Users\Samuel\Documents\JAVA\safetynet)
+2025-09-29T08:37:09.781+02:00 DEBUG 32304 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-29T08:37:09.782+02:00  INFO 32304 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-09-29T08:37:10.812+02:00  INFO 32304 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-29T08:37:10.826+02:00  INFO 32304 --- [safetynet] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-29T08:37:10.827+02:00  INFO 32304 --- [safetynet] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-29T08:37:10.879+02:00  INFO 32304 --- [safetynet] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-29T08:37:10.879+02:00  INFO 32304 --- [safetynet] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1048 ms
+2025-09-29T08:37:11.361+02:00  WARN 32304 --- [safetynet] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-09-29T08:37:11.458+02:00  INFO 32304 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-29T08:37:11.469+02:00  INFO 32304 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Started SafetynetApplication in 2.138 seconds (process running for 3.593)
+2025-09-29T08:37:19.148+02:00  INFO 32304 --- [safetynet] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-29T08:37:19.148+02:00  INFO 32304 --- [safetynet] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-29T08:37:19.150+02:00  INFO 32304 --- [safetynet] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-09-29T08:37:19.199+02:00  INFO 32304 --- [safetynet] [http-nio-8080-exec-1] c.o.s.controller.FirestationController   : GET method called for the station number: 3
+2025-09-29T08:37:19.229+02:00  WARN 32304 --- [safetynet] [http-nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation]
+2025-09-29T08:40:29.887+02:00  INFO 32304 --- [safetynet] [http-nio-8080-exec-5] c.o.s.controller.FirestationController   : GET method called for the station number: 3
+2025-09-29T08:40:29.890+02:00  WARN 32304 --- [safetynet] [http-nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation]
+2025-09-29T08:40:32.901+02:00  INFO 32304 --- [safetynet] [http-nio-8080-exec-6] c.o.s.controller.FirestationController   : GET method called for the station number: 1
+2025-09-29T08:40:32.902+02:00  WARN 32304 --- [safetynet] [http-nio-8080-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotAcceptableException: No acceptable representation]
+2025-09-29T08:41:26.893+02:00  INFO 32304 --- [safetynet] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-29T08:41:27.206+02:00  INFO 32304 --- [safetynet] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-29T08:41:31.195+02:00  INFO 38080 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Starting SafetynetApplication using Java 17.0.15 with PID 38080 (C:\Users\Samuel\Documents\JAVA\safetynet\target\classes started by Samuel in C:\Users\Samuel\Documents\JAVA\safetynet)
+2025-09-29T08:41:31.197+02:00 DEBUG 38080 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-29T08:41:31.198+02:00  INFO 38080 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-09-29T08:41:32.204+02:00  INFO 38080 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-29T08:41:32.216+02:00  INFO 38080 --- [safetynet] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-29T08:41:32.217+02:00  INFO 38080 --- [safetynet] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-29T08:41:32.266+02:00  INFO 38080 --- [safetynet] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-29T08:41:32.266+02:00  INFO 38080 --- [safetynet] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1027 ms
+2025-09-29T08:41:32.765+02:00  WARN 38080 --- [safetynet] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-09-29T08:41:32.858+02:00  INFO 38080 --- [safetynet] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-29T08:41:32.867+02:00  INFO 38080 --- [safetynet] [main] c.o.safetynet.SafetynetApplication       : Started SafetynetApplication in 2.132 seconds (process running for 2.419)
+2025-09-29T08:41:35.785+02:00  INFO 38080 --- [safetynet] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-29T08:41:35.785+02:00  INFO 38080 --- [safetynet] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-29T08:41:35.786+02:00  INFO 38080 --- [safetynet] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-09-29T08:41:35.828+02:00  INFO 38080 --- [safetynet] [http-nio-8080-exec-1] c.o.s.controller.FirestationController   : GET method called for the station number: 1
+2025-09-29T08:42:07.333+02:00  INFO 38080 --- [safetynet] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-29T08:42:07.566+02:00  INFO 38080 --- [safetynet] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete

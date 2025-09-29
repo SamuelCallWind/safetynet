@@ -1,5 +1,6 @@
 C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\controller\ChildAlertController.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\controller\CommunityEmailController.java
+C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\controller\ErrorController.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\controller\FireController.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\controller\FirestationController.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\controller\FloodController.java
@@ -12,6 +13,8 @@ C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safety
 C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\dto\CommunityEmailResponse.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\dto\FirePersonDto.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\dto\FireResponse.java
+C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\dto\FirestationPerson.java
+C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\dto\FirestationResponse.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\dto\FloodPersonDto.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\dto\FloodResponse.java
 C:\Users\Samuel\Documents\JAVA\safetynet\src\main\java\com\openclassrooms\safetynet\dto\HouseholdDto.java

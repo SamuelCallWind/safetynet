@@ -15,7 +15,7 @@ public class PersonInfoLastNameController {
     @Autowired
     PersonInfoLastNameService personInfoLastNameService;
 
-    @GetMapping("/personInfolastName")
+    @GetMapping("/personInfo")
     public PersonInfoLastNameReponse getPersonInfolastName(@RequestParam String lastName) {
         log.info("GET method called with the last name: {}", lastName);
         return personInfoLastNameService.getPersonInfoLastName(lastName);
