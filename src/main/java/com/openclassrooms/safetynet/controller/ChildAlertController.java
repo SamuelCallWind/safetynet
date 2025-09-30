@@ -21,6 +21,11 @@ public class ChildAlertController {
     @GetMapping("/childAlert")
     public ChildAlertResponse getChildAlert(@RequestParam String address) {
         log.info("GET method called for address: {}", address);
-        return childAlertService.getChildAlert(address);
+        ChildAlertResponse car = childAlertService.getChildAlert(address);
+        if (car.getChildren().isEmpty() && car.getHouseholdMembers().isEmpty()) {
+            throw new RuntimeException();
+        } else {
+            return car;
+        }
     }
 }
